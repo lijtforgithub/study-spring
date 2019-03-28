@@ -1,26 +1,20 @@
 package com.ljt.study.senior.bean;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.ljt.study.senior.AbstractTest;
 
 /**
  * @author LiJingTang
  * @version 2019年3月27日 下午10:46:52
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {MainConfig.class})
-public class BeanTest extends AbstractJUnit4SpringContextTests {
+public class BeanTest extends AbstractTest {
 
 	@Test
 	public void testBean() {
-		String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
-		
-		for (String name : beanDefinitionNames) {
-			System.out.println(name);
-		}
+		applicationContext = new AnnotationConfigApplicationContext(MainConfig.class);
+		printContextBean();
 	}
 	
 }
