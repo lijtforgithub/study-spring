@@ -16,7 +16,7 @@ public abstract class AbstractTest {
 	public void printContextBean() {
 		Objects.requireNonNull(applicationContext, "IOC容器为空");
 		
-		Stream.of(applicationContext.getBeanDefinitionNames()).forEach(System.out::println);
+		Stream.of(applicationContext.getBeanDefinitionNames()).forEach(System.err::println);
 	}
 
 }
