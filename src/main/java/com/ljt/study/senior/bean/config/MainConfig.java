@@ -15,7 +15,7 @@ import com.ljt.study.senior.bean.entity.Animal;
 @Configuration
 @ComponentScan("com.ljt.study.senior.bean.entity")
 @Import(Animal.class)
-public class BeanConfig {
+public class MainConfig {
 
 	/**
 	 * 默认使用方法名作为Bean的ID
@@ -28,7 +28,7 @@ public class BeanConfig {
 	/**
 	 * 自定义Bean的ID
 	 */
-	@Bean("user-x")
+	@Bean("user_x")
 	public User userX() {
 		return new User();
 	}
