@@ -1,11 +1,12 @@
-package com.ljt.study.senior.bean.config;
+package com.ljt.study.annotation.bean.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
+
+import com.ljt.study.annotation.bean.custom.CustomTypeFilter;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
-
-import com.ljt.study.senior.bean.custom.CustomTypeFilter;
 
 /**
  * @author LiJingTang

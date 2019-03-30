@@ -1,4 +1,4 @@
-package com.ljt.study.senior;
+package com.ljt.study.annotation;
 
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -18,11 +18,13 @@ public abstract class AbstractTest {
 	
 	@After
 	public void printContextBean() {
-		Objects.requireNonNull(applicationContext, "IOC容器为空");
+		Objects.requireNonNull(applicationContext, "容器为空");
+		
+		System.out.println("\r\n****** 打印容器里的Bean ******");
 		
 		Stream.of(applicationContext.getBeanDefinitionNames())
 			.filter(name -> !name.startsWith(SPRING_BEAN))
-			.forEach(System.err::println);
+			.forEach(System.out::println);
 	}
-
+	
 }

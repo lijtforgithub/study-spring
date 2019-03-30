@@ -1,0 +1,19 @@
+package com.ljt.study.annotation.conditional;
+
+import org.junit.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.ljt.study.annotation.AbstractTest;
+
+/**
+ * @author LiJingTang
+ * @version 2019年3月29日 下午11:20:38
+ */
+public class ConditionalTest extends AbstractTest {
+	
+	@Test
+	public void testCond() {
+		applicationContext = new AnnotationConfigApplicationContext(MainConfig.class);
+	}
+
+}

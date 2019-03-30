@@ -1,12 +1,12 @@
-package com.ljt.study.senior.bean.config;
+package com.ljt.study.annotation.bean.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import com.ljt.study.annotation.bean.entity.Animal;
 import com.ljt.study.entity.User;
-import com.ljt.study.senior.bean.entity.Animal;
 
 /**
  * @author LiJingTang

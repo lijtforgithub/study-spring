@@ -1,4 +1,4 @@
-package com.ljt.study.senior.bean.entity;
+package com.ljt.study.annotation.bean.entity;
 
 import org.springframework.stereotype.Component;
 
