@@ -7,7 +7,7 @@ import com.ljt.study.annotation.AbstractTest;
 import com.ljt.study.annotation.bean.config.ComponentScanConfig;
 import com.ljt.study.annotation.bean.config.FactoryBeanConfig;
 import com.ljt.study.annotation.bean.config.ImportConfig;
-import com.ljt.study.annotation.bean.config.MainConfig;
+import com.ljt.study.annotation.bean.config.BeanConfig;
 
 /**
  * @author LiJingTang
@@ -16,8 +16,8 @@ import com.ljt.study.annotation.bean.config.MainConfig;
 public class BeanTest extends AbstractTest {
 
 	@Test
-	public void testMain() {
-		applicationContext = new AnnotationConfigApplicationContext(MainConfig.class);
+	public void testBean() {
+		applicationContext = new AnnotationConfigApplicationContext(BeanConfig.class);
 		printBeanId();
 	}
 	

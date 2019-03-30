@@ -12,8 +12,8 @@ import com.ljt.study.annotation.AbstractTest;
 public class ConditionalTest extends AbstractTest {
 	
 	@Test
-	public void testCond() {
-		applicationContext = new AnnotationConfigApplicationContext(MainConfig.class);
+	public void testCondition() {
+		applicationContext = new AnnotationConfigApplicationContext(ConditionConfig.class);
 		printBeanId();
 	}
 

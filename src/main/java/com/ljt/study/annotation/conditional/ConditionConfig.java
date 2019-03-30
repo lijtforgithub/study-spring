@@ -11,7 +11,7 @@ import com.ljt.study.entity.User;
  * @version 2019年3月29日 下午11:08:36
  */
 @Configuration
-public class MainConfig {
+public class ConditionConfig {
 
 	@Bean
 	@Conditional(ConditionOnWindows.class)

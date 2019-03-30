@@ -15,7 +15,7 @@ import com.ljt.study.entity.User;
 @Configuration
 @ComponentScan("com.ljt.study.senior.bean.entity")
 @Import(Animal.class)
-public class MainConfig {
+public class BeanConfig {
 
 	/**
 	 * 默认使用方法名作为Bean的ID
