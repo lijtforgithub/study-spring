@@ -15,7 +15,7 @@ public class LazyConfig {
 	
 	@Lazy
 	@Bean
-	public User lazyUser() {
+	public User user() {
 		System.out.println("向容器里添加对象");
 		return new User();
 	}

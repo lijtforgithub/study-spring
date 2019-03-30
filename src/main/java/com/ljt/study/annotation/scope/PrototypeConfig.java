@@ -16,7 +16,7 @@ public class PrototypeConfig {
 	
 	@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 	@Bean
-	public User prototypeUser() {
+	public User user() {
 		System.out.println("向容器里添加对象");
 		return new User();
 	}

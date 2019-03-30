@@ -16,7 +16,7 @@ public class SingletonConfig {
 	
 	@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 	@Bean
-	public User singletonUser() {
+	public User user() {
 		System.out.println("向容器里添加对象");
 		return new User();
 	}

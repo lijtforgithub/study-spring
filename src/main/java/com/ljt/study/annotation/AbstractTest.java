@@ -3,7 +3,6 @@ package com.ljt.study.annotation;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-import org.junit.After;
 import org.springframework.context.ApplicationContext;
 
 /**
@@ -16,15 +15,16 @@ public abstract class AbstractTest {
 	
 	protected ApplicationContext applicationContext;
 	
-	@After
-	public void printContextBean() {
+	public void printBeanId() {
 		Objects.requireNonNull(applicationContext, "容器为空");
 		
-		System.out.println("\r\n****** 打印容器里的Bean ******");
+		System.out.println("****** 打印容器里自定义的Bean开始 ******");
 		
 		Stream.of(applicationContext.getBeanDefinitionNames())
 			.filter(name -> !name.startsWith(SPRING_BEAN))
 			.forEach(System.out::println);
+		
+		System.out.println("****** 打印容器里自定义的Bean结束 ******");
 	}
 	
 }

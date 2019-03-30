@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @version 2015年9月23日上午10:34:54
  */
 public class User implements Serializable {
-	
+
 	private static final long serialVersionUID = -8368263216275207741L;
 	
 	private int id;

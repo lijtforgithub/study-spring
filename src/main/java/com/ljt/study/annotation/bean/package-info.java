@@ -10,4 +10,5 @@
 	3.@Import
 	  3.1.@Import + ImportSelector
 	  3.2.@Import + ImportBeanDefinitionRegistrar
+	4.FactoryBean
  */

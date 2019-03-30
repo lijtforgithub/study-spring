@@ -13,7 +13,7 @@ import org.springframework.context.annotation.FilterType;
  * @version 2019年3月29日 下午4:06:24
  */
 @Configuration
-@ComponentScan(basePackages = "com.ljt.study.senior.bean.entity", useDefaultFilters = false, 
+@ComponentScan(basePackages = "com.ljt.study.annotation.bean.entity", useDefaultFilters = false, 
 	includeFilters = @Filter(type = FilterType.CUSTOM, classes = CustomTypeFilter.class))
 //@ComponentScans
 public class ComponentScanConfig {
