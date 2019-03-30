@@ -18,25 +18,25 @@ public class BeanTest extends AbstractTest {
 	@Test
 	public void testBean() {
 		applicationContext = new AnnotationConfigApplicationContext(BeanConfig.class);
-		printBeanId();
+		printBeanDefinition();
 	}
 	
 	@Test
 	public void testComponentScan() {
 		applicationContext = new AnnotationConfigApplicationContext(ComponentScanConfig.class);
-		printBeanId();
+		printBeanDefinition();
 	}
 	
 	@Test
 	public void testImport() {
 		applicationContext = new AnnotationConfigApplicationContext(ImportConfig.class);
-		printBeanId();
+		printBeanDefinition();
 	}
 	
 	@Test
 	public void testFactoryBean() {
 		applicationContext = new AnnotationConfigApplicationContext(FactoryBeanConfig.class);
-		printBeanId();
+		printBeanDefinition();
 		
 		System.out.println("userFactoryBean => " + applicationContext.getBean("userFactoryBean").getClass());
 		System.out.println("&userFactoryBean => " + applicationContext.getBean("&userFactoryBean").getClass());

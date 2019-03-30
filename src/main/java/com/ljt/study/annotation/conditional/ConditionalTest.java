@@ -14,7 +14,7 @@ public class ConditionalTest extends AbstractTest {
 	@Test
 	public void testCondition() {
 		applicationContext = new AnnotationConfigApplicationContext(ConditionConfig.class);
-		printBeanId();
+		printBeanDefinition();
 	}
 
 }

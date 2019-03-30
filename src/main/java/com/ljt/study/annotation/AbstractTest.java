@@ -15,7 +15,7 @@ public abstract class AbstractTest {
 	
 	protected ApplicationContext applicationContext;
 	
-	public void printBeanId() {
+	public void printBeanDefinition() {
 		Objects.requireNonNull(applicationContext, "容器为空");
 		
 		System.out.println("****** 打印容器里自定义的Bean开始 ******");

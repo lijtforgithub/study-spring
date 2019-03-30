@@ -16,7 +16,7 @@ public class ScopeTest extends AbstractTest {
 	public void testSingleton() {
 		applicationContext = new AnnotationConfigApplicationContext(SingletonConfig.class);
 		System.out.println("容器初始化完成");
-		printBeanId();
+		printBeanDefinition();
 		
 		System.out.println("containsBean => " + applicationContext.containsBean("user"));
 		System.out.println("containsBeanDefinition => " + applicationContext.containsBeanDefinition("user"));
@@ -30,7 +30,7 @@ public class ScopeTest extends AbstractTest {
 	public void testPrototype() {
 		applicationContext = new AnnotationConfigApplicationContext(PrototypeConfig.class);
 		System.out.println("容器初始化完成");
-		printBeanId();
+		printBeanDefinition();
 		
 		System.out.println("containsBean => " + applicationContext.containsBean("user"));
 		System.out.println("containsBeanDefinition => " + applicationContext.containsBeanDefinition("user"));
@@ -44,7 +44,7 @@ public class ScopeTest extends AbstractTest {
 	public void testLazy() {
 		applicationContext = new AnnotationConfigApplicationContext(LazyConfig.class);
 		System.out.println("容器初始化完成");
-		printBeanId();
+		printBeanDefinition();
 		
 		User user1 = applicationContext.getBean(User.class);
 		User user2 = applicationContext.getBean(User.class);
