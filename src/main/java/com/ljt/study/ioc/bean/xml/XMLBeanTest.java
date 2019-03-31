@@ -12,7 +12,7 @@ import com.ljt.study.ioc.bean.xml.scope.SingletonBean;
  * @author LiJingTang
  * @version 2019年3月31日 上午10:43:51
  */
-public class BeanTest extends AbstractTest {
+public class XMLBeanTest extends AbstractTest {
 
 	@Test
 	public void testBeans() {

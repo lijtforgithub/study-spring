@@ -9,7 +9,7 @@ import com.ljt.study.AbstractTest;
  * @author LiJingTang
  * @version 2019年3月31日 下午2:05:12
  */
-public class DITest extends AbstractTest {
+public class XmlDITest extends AbstractTest {
 	
 	@Test
 	public void testConstructor() {

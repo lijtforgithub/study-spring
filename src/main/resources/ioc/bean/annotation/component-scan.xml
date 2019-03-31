@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+		
+		<!-- 使用component-scan（组件-扫描，译者注）时，AutowiredAnnotationBeanPostProcessor和CommonAnnotationBeanPostProcessor二者都是隐式包含的。
+			这就意味着两个组件被自动检测之后就装配在一起了-而不需要在XML中提供其它任何bean的配置元数据。可以将annotation-config属性置为false来关闭 -->
+		<!-- 你可以使用<component-scan/>元素中的use-default-filter="false"属性来关闭默认的过滤器。
+			这会导致关闭使用@Component，@Repository，@Service或@Controller注解的类的自动检测。 -->
+		<context:component-scan base-package="com.ljt.study.ioc.bean.annotation.component" annotation-config="true" use-default-filters="true" >
+        	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+			<context:exclude-filter type="regex" expression=".*.other.*" />
+		</context:component-scan>
+		
+</beans>

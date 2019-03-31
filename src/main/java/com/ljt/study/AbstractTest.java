@@ -24,13 +24,13 @@ public abstract class AbstractTest {
 	protected void printBeanDefinition() {
 		Objects.requireNonNull(applicationContext, "IoC容器为空");
 		
-		LOG.info("打印IoC容器里自定义的Bean开始");
+		LOG.info("打印IoC容器里自定义的BeanDefinitionName开始");
 		
 		Stream.of(applicationContext.getBeanDefinitionNames())
 			.filter(name -> !name.startsWith(SPRING_BEAN))
 			.forEach(System.out::println);
 		
-		LOG.info("打印IoC容器里自定义的Bean结束");
+		LOG.info("打印IoC容器里自定义的BeanDefinitionName结束");
 	}
 	
 	private static final String SUFFIX = ".xml";
