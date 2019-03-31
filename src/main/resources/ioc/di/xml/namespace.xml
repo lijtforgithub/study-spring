@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:c="http://www.springframework.org/schema/c"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	
+	<bean class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+	    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+	    <property name="url" value="jdbc:mysql://localhost:3306/TEST" />
+	    <property name="username" value="root" />
+	    <property name="password" value="admin" />
+	</bean>
+	
+	<!-- 使用了p-命名空间（错误之处会在运行时被发现而不是设计的时候） -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close"
+        p:driverClassName="com.mysql.jdbc.Driver"
+        p:url="jdbc:mysql://localhost:3306/TEST"
+        p:username="root"
+        p:password="admin" />
+        
+    <bean id="dbProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    	<!-- 作为java.util.Properties类型 -->
+    	<!-- public void setProperties(Properties properties) {
+			this.localProperties = new Properties[] {properties};
+		} -->
+	    <property name="properties">
+	        <value>
+	            jdbc.driver.className = com.mysql.jdbc.Driver
+	            jdbc.url = jdbc:mysql://localhost:3306/TEST
+	        </value>
+	    </property>
+	</bean>
+		
+		
+	<!-- 用 p-命令空间代替property标签描述属性的值和/或协作的bean -->
+	<bean name="classic" class="com.ljt.study.ioc.bean.xml.Bean">
+        <property name="emptyString" value="emptyString"/>
+    </bean>
+    <bean name="p-namespace" class="com.ljt.study.ioc.bean.xml.Bean" p:emptyString="emptyString"/>
+        
+    <bean class="com.ljt.study.ioc.di.xml.SetterBean"
+    	p:data="用 p-命令空间代替property标签描述属性的值和/或协作的bean"
+    	p:bean-ref="pnsCollaboratorsBean" />
+    
+    
+    <!-- 用内c-命名空间代替constructor-arg配置构造方法参数  -->
+    <bean class="com.ljt.study.ioc.di.xml.ConstructorBean" 
+    	c:bean-ref="cnsCollaboratorsBean" 
+    	c:data="c-命名空间代替constructor-arg配置构造方法参数" />
+    <!-- 因为XML的语法，索引符号需要在其头部使用_作为XML属性名称，因为XML中属性是不能以数字开头的（尽管一些IDE允许这样做
+	在实际运用中，构造方法解析机制在匹配参数时是非常有效率的，所以除非真有需要，我们建议在配置中使用名称符号。 -->
+    <bean id="foo" class="com.ljt.study.ioc.di.xml.ConstructorBean" 
+    	c:_0="c-命名空间代替constructor-arg配置构造方法参数（构造参数索引）" 
+    	c:_1="25"/>
+   
+   	
+    <!-- 协作者Bean -->
+	<bean id="pnsCollaboratorsBean" class="com.ljt.study.ioc.di.xml.SetterBean$NestedBean" />
+	<bean id="cnsCollaboratorsBean" class="com.ljt.study.ioc.bean.xml.Bean" />
+		
+</beans>

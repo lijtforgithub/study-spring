@@ -3,10 +3,10 @@ package com.ljt.study.annotation.bean;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.ljt.study.annotation.AbstractTest;
 import com.ljt.study.annotation.bean.config.ComponentScanConfig;
 import com.ljt.study.annotation.bean.config.FactoryBeanConfig;
 import com.ljt.study.annotation.bean.config.ImportConfig;
+import com.ljt.study.AbstractTest;
 import com.ljt.study.annotation.bean.config.BeanConfig;
 
 /**

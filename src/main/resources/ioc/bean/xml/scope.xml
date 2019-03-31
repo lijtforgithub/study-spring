@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	
+	<!-- 默认就是单例 -->
+	<bean id="defaultBean" class="com.ljt.study.ioc.bean.xml.Bean" />
+	
+	
+	<bean id="singletonBean" class="com.ljt.study.ioc.bean.xml.scope.SingletonBean" scope="singleton" init-method="init" destroy-method="destroy" />
+	
+	
+	<!-- 非单例，原型范围的bean就是当每次对指定bean进行请求时，一个新的bean的实例就会创建 。
+	也就是说，bean被注入到其它bean或是在容器中通过getBean()方法来请求时就会创建新的bean实例。-->
+	<bean id="prototypeBean" class="com.ljt.study.ioc.bean.xml.scope.PrototypeBean" scope="prototype" init-method="init" destroy-method="destroy" />
+	
+		
+	<!-- 实现接口调用回调方法耦合了Spring代码 不建议使用 -->
+	<bean id="callbackBean" class="com.ljt.study.ioc.bean.xml.scope.CallbackBean" init-method="init" destroy-method="personalDestroy"  />	
+
+</beans>

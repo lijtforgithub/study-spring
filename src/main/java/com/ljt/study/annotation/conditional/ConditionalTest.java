@@ -3,7 +3,7 @@ package com.ljt.study.annotation.conditional;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.ljt.study.annotation.AbstractTest;
+import com.ljt.study.AbstractTest;
 
 /**
  * @author LiJingTang

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+    
+	<!-- 基于setter方法的依赖注入 -->
+	<bean class="com.ljt.study.ioc.di.xml.SetterBean">
+		<property name="explain" value="基于setter方法的依赖注入" />
+	</bean>
+	
+	<!-- 两种依赖注入方式一起用最后属性的值为setter方法注入的值 -->
+	<bean id="diBeanId" class="com.ljt.study.ioc.di.xml.SetterBean">
+		<property name="explain" value="两种依赖注入方式一起用，setter方法赋值" />
+		<constructor-arg name="explain" value="两种依赖注入方式一起用，构造方法赋值" />
+	</bean>
+	
+	<!-- 使用静态工厂方法来实例化 -->
+	<bean class="com.ljt.study.ioc.di.xml.SetterBean" factory-method="createInstance">
+		<constructor-arg value="调用static工厂方法并返回一个对象的实例，先实例化协作者（工厂方法参数）bean" />
+		<constructor-arg ref="setterCollaboratorsBean" /> <!-- 先实例化协作者bean -->
+	</bean>
+	
+	<!-- ref -->
+	<bean class="com.ljt.study.ioc.di.xml.SetterBean">
+		<property name="explain" value="idref元素是一种简单防错的形式来传递容器中另外一个bean的id 不必须要实例化协作者bean" />
+		<property name="beanName">
+			<idref bean="setterCollaboratorsBean1" />
+		</property>
+	</bean>
+	
+	<bean class="com.ljt.study.ioc.di.xml.SetterBean">
+		<property name="explain" value="ref元素先调用本身的构造方法，再调用协作者bean的构造方法，和下面的内部bean顺序一样" />
+		<property name="bean" ref="setterCollaboratorsBean2" />
+			<!-- 通过<ref/>标签的bean属性来指定目标bean是最常用的方式，并允许创建引用到相同容器或父容器的任意bean中，
+			而不管它们是不是在同一个XML文件中。bean属性的值可能和目标bean的id属性相同，或者是目标bean的name属性值之一 -->
+		<!-- 	<ref bean="setterCollaboratorsBean2" />
+		</property> -->
+	</bean>
+	
+	<!-- ? 暂时没搞明白怎么用 -->
+	<!--<bean id="parentBeanId" class="org.springframework.aop.framework.ProxyFactoryBean"> bean名称和父bean相同
+	    <property name="target">
+	        <ref parent="parentBeanId" /> 注意我们如何引用父bean
+	    </property>
+	</bean> -->
+	
+	<!-- 内部bean -->
+	<bean class="com.ljt.study.ioc.di.xml.SetterBean">
+    	<property name="explain" value="在property或constructor-arg元素内部的bean元素的定义被称为内部bean并且先给bean属性setter值 （先注入bean再注入其他简单类型）" />
+	    <property name="bean">
+	        <bean class="com.ljt.study.ioc.di.xml.SetterBean$NestedBean" /> <!-- 此种方式不会先实例化子bean -->
+	    </property>
+	</bean>
+	
+	
+	<!-- 协作者Bean -->
+	<bean id="setterCollaboratorsBean" class="com.ljt.study.ioc.di.xml.SetterBean$NestedBean" />
+	<bean id="setterCollaboratorsBean1" class="com.ljt.study.ioc.di.xml.SetterBean$NestedBean">
+		<constructor-arg value="通过property -> idref 配置注入" />
+	</bean>
+	<bean id="setterCollaboratorsBean2" class="com.ljt.study.ioc.di.xml.SetterBean$NestedBean">
+		<constructor-arg value="通过property -> ref 配置注入" />
+	</bean>
+	
+</beans>

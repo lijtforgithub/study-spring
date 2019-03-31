@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	
+	<!-- 自动装配（先调用自身的构造方法，再实例化协作者） -->
+	
+	<bean id="autowireByNameBean" class="com.ljt.study.ioc.di.xml.AutowireBean" autowire="byName">
+		<property name="explain" value="自动装配-byName（找不到bean对应的名字的则不注入，不会抛出异常，如果用ref则不然）。一个容器中本身就不能有相同名字的bean" />
+	</bean>
+	
+	<bean id="autowireByTypeBean" class="com.ljt.study.ioc.di.xml.AutowireBean" autowire="byType">
+		<property name="explain" value="自动装配-byType（找不到bean对应的类型的则不注入，不会抛出异常，如果用ref则不然）。如果一个类型有多个匹配，则有异常" />
+	</bean>
+	
+	<!-- ? 暂时没搞明白怎么用 -->
+	<bean id="autowireConstructorBean" class="com.ljt.study.ioc.di.xml.AutowireBean" autowire="constructor">
+		<property name="explain" value="自动装配-constructor（暂时没搞明白怎么用）" />
+	</bean>
+	
+	<bean id="dependsOnBean" class="com.ljt.study.ioc.bean.xml.DependsOnBean" />
+	<!-- autowire-candidate属性为false；容器会把指定的bean对自动装配不可用 所以在byType时不会报错  -->
+	<bean class="com.ljt.study.ioc.bean.xml.DependsOnBean" autowire-candidate="false" />
+	
+</beans>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	
+	<!-- 总结：如果没有依赖协作关系，按照配置文件的顺序从上至下实例化Bean -->
+	
+	
+	<!-- 创建一个bean定义，其实质是用该bean定义对应的类来创建真正实例的配方。
+		把bean定义看成一个配方很有意义，它与class很类似，只根据一张处方就可以创建多个实例。 -->
+	<bean id="beanId" class="com.ljt.study.ioc.bean.xml.Bean" />
+	<!-- 在bean定义外面起别名 -->
+	<alias name="beanId" alias="aliasBeanName" />
+	
+	
+	<!-- 静态内部类 -->
+	<bean id="nestedBean" class="com.ljt.study.ioc.bean.xml.Bean$Nested" />
+	
+	
+	<!-- ? 成员内部类 不知道怎么配置（先要实例外围对象 猜测应该在XML没法配置） -->
+	<!-- <bean id="innerBean" class="com.ljt.study.ioc.bean.xml.Bean$Inner" /> -->
+	
+	
+	<!-- 使用静态工厂方法来实例化 -->
+	<bean class="com.ljt.study.ioc.bean.xml.BeanFactory" factory-method="createInstance" />
+	
+	
+	<!-- 工厂bean，包含名为createInstance()的方法 -->
+	<bean id="beanLocator" class="com.ljt.study.ioc.bean.xml.BeanLocator" />
+	<!-- 通过工厂bean来创建的bean（一个工厂类也可以有多于一个工厂方法）-->
+	<bean factory-bean="beanLocator" factory-method="createLocatorBeanInstance" />
+	
+	
+	<!-- null和空字符串 -->
+	<bean id="emptyAndNull" class="com.ljt.study.ioc.bean.xml.Bean">
+		<property name="emptyString" value="" />
+		<property name="nullString"><null /></property>
+	</bean>
+	
+	
+	<!-- 复合属性名称（在设置bean的属性时，只要路径中的所有组件，除了最后一个属性名称是非null的，可以使用复合或者嵌套的属性名称） -->
+	<bean id="compoundBeanId" class="com.ljt.study.ioc.bean.xml.CompoundBean">
+		 <property name="bean.emptyString" value="在设置bean的属性时，只要路径中的所有组件，除了最后一个属性名称是非null的，可以使用复合或者嵌套的属性名称 " />
+	</bean>
+	
+</beans>

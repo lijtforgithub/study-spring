@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	
+	<!-- 构造方法参数解析 -->
+	<bean class="com.ljt.study.ioc.di.xml.ConstructorBean">
+		<constructor-arg value="构造方法参数解析 ，先实例化协作者（构造方法参数）Bean - 没有潜在的歧义存在没有继承关系，和构造方法参数顺序不一致也能按照类型匹配。" />
+		<constructor-arg ref="conCollaboratorsBean" /> <!-- 先实例化协作者Bean -->
+	</bean>
+	
+	<!-- 构造方法参数类型匹配 Spring不能决定简单类型值的类型，不赋值type的话不能实例化 -->
+	<bean class="com.ljt.study.ioc.di.xml.ConstructorBean">
+		<constructor-arg type="int" value="25" />
+		<constructor-arg type="String" value="构造方法参数类型匹配" />
+	</bean>
+	
+	<!-- 构造方法参数索引 -->
+	<bean class="com.ljt.study.ioc.di.xml.ConstructorBean">
+		<constructor-arg index="1" value="25" />
+		<constructor-arg index="0" value="构造方法参数索引" />
+	</bean>
+	
+	<!-- 构造方法参数名称 -->
+	<bean class="com.ljt.study.ioc.di.xml.ConstructorBean">
+		<constructor-arg name="value" value="25" />
+		<constructor-arg name="explain" value="构造方法参数名称" />
+	</bean>
+	
+	<!-- @ConstructorProperties -->
+	<bean class="com.ljt.study.ioc.di.xml.ConstructorBean">
+		<constructor-arg name="aliasAttrName" value="构造方法参数名称@ConstructorProperties忽略属性" />
+	</bean>
+	
+	
+	<!-- 协作者Bean -->
+	<bean id="conCollaboratorsBean" class="com.ljt.study.ioc.bean.xml.Bean" />
+	
+</beans>

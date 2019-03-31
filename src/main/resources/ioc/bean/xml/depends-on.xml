@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	
+	<!-- 如果一个bean是另外一个bean的依赖，通常表明了它会被设置成另外一个的属性。典型的情况是在基于XML的配置元数据中使用<ref/>元素来完成。
+	然而，有时在两个bean之间的依赖并不是直接的；比如，类中的静态初始化器需要触发，就像数据库驱动程序的注册。
+	depends-on属性可以明确地强制一个或多个bean在使用这个元素的bean被初始化之前被初始化。 -->	
+	<bean class="com.ljt.study.ioc.bean.xml.DependsOnBean" depends-on="thirdBean,firstBean,secondBean">
+	    <property name="explain" value="首先按照depends-on中的顺序依次实例化bean，再调用自身的构造方法，最后注入属性值Bean" />
+	    <property name="bean" ref="depCollaboratorsBean" />
+	</bean>
+	<!-- 在bean定义中的depends-on属性可以指定初始化时的依赖，也可以是仅仅是单例bean，对应销毁时的依赖。
+	和给定bean定义了depends-on关系的依赖bean首先被销毁，先于给定的bean本身。因此depends-on也能控制关闭顺序。 -->
+	
+	
+	<bean id="firstBean" class="com.ljt.study.ioc.bean.xml.FirstBean" depends-on="secondBean"/>
+	<bean id="secondBean" class="com.ljt.study.ioc.bean.xml.SecondBean" />
+	<bean id="thirdBean" class="com.ljt.study.ioc.bean.xml.ThirdBean" />
+	<!-- 协作者Bean -->
+	<bean id="depCollaboratorsBean" class="com.ljt.study.ioc.bean.xml.Bean" />
+	
+</beans>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!-- null和空字符串 -->
+	<bean id="emptyAndNull" class="com.ljt.study.ioc.bean.xml.Bean">
+		<property name="emptyString" value="" />
+		<property name="nullString"><null /></property>
+	</bean>
+	
+	
+	<!-- 复合属性名称（在设置bean的属性时，只要路径中的所有组件，除了最后一个属性名称是非null的，可以使用复合或者嵌套的属性名称） -->
+	<bean id="compoundBeanId" class="com.ljt.study.ioc.bean.xml.CompoundBean">
+		 <property name="bean.emptyString" value="在设置bean的属性时，只要路径中的所有组件，除了最后一个属性名称是非null的，可以使用复合或者嵌套的属性名称 " />
+	</bean>
+	
+</beans>

@@ -16,7 +16,7 @@ public class LazyConfig {
 	@Lazy
 	@Bean
 	public User user() {
-		System.out.println("向容器里添加对象");
+		System.out.println("向IoC容器里添加对象");
 		return new User();
 	}
 	

@@ -3,7 +3,7 @@ package com.ljt.study.annotation.scope;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.ljt.study.annotation.AbstractTest;
+import com.ljt.study.AbstractTest;
 import com.ljt.study.entity.User;
 
 /**
@@ -15,7 +15,7 @@ public class ScopeTest extends AbstractTest {
 	@Test
 	public void testSingleton() {
 		applicationContext = new AnnotationConfigApplicationContext(SingletonConfig.class);
-		System.out.println("容器初始化完成");
+		System.out.println("IoC容器初始化完成");
 		printBeanDefinition();
 		
 		System.out.println("containsBean => " + applicationContext.containsBean("user"));
@@ -29,7 +29,7 @@ public class ScopeTest extends AbstractTest {
 	@Test
 	public void testPrototype() {
 		applicationContext = new AnnotationConfigApplicationContext(PrototypeConfig.class);
-		System.out.println("容器初始化完成");
+		System.out.println("IoC容器初始化完成");
 		printBeanDefinition();
 		
 		System.out.println("containsBean => " + applicationContext.containsBean("user"));
@@ -43,7 +43,7 @@ public class ScopeTest extends AbstractTest {
 	@Test
 	public void testLazy() {
 		applicationContext = new AnnotationConfigApplicationContext(LazyConfig.class);
-		System.out.println("容器初始化完成");
+		System.out.println("IoC容器初始化完成");
 		printBeanDefinition();
 		
 		User user1 = applicationContext.getBean(User.class);

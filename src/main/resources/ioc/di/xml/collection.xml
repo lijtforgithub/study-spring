@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+
+    <!-- ? 暂时不知道怎么配置修改集合的默认实现类型 LinkedHashSet LinkedHashMap--> <!-- abstract="true"  -->
+	<bean id="collBean" class="com.ljt.study.ioc.di.xml.CollectionBean">
+	    <property name="props">
+	        <props>
+	            <prop key="administrator">administrator@example.org</prop>
+	            <prop key="support">support@example.org</prop>
+	            <prop key="development">development@example.org</prop>
+	        </props>
+	    </property>
+	    <property name="list">
+	        <list>
+	            <value>a list element followed by a reference</value>
+	            <ref bean="aliasBeanName" />
+	        </list>
+	    </property>
+	    <property name="map">
+	        <map>
+	            <entry key="an entry" value="just some string" />
+	            <entry key="a ref" value-ref="beanId" />
+	        </map>
+	    </property>
+	    <property name="set">
+	        <set>
+	            <value>just some string</value>
+	            <ref bean="nestedBean" />
+	        </set>
+	    </property>
+	</bean>
+	
+	<!--子bean的Properties集合的值设置继承了从父<props/>元素而来的所有属性，子bean中support的值覆盖了父bean中的值 -->
+	<bean id="childCollBean" parent="collBean">
+        <property name="props">
+            <props merge="true">
+                <prop key="sales">sales@example.com</prop>
+                <prop key="support">support@example.co.uk</prop>
+            </props>
+        </property>
+    </bean>
+		
+	
+	<!-- 依赖beans.xml -->	
+	<import resource="classpath:/ioc/bean/xml/beans.xml" />
+	
+</beans>

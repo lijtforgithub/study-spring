@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	
+	<!-- 默认情况下，ApplicationContext的实现类积极地创建并配置所有单例的bean，作为初始化过程的一部分。
+	通常来说，这种预实例化是非常可取的，因为在配置或周边环境中的错误可以直接被发现，而不是几小时或几天后去发现。
+	当这种行为不可用时，你可以阻止单例bean的预实例化，在bean定义中使用延迟初始化来标记一下就可以了。
+	延迟初始化bean告诉IoC容器在该bean第一次被请求时再来实例化，而不是在启动时实例化。 -->
+	<bean id="notSingleton" class="com.ljt.study.ioc.bean.xml.LazyBean" scope="prototype">
+		<constructor-arg value=" ApplicationContext的实现类积极地创建并配置所有单例的bean。不是单例的不会在容器启动时实例化。" />
+	</bean>
+	
+	<bean id="lazyBean" class="com.ljt.study.ioc.bean.xml.LazyBean" lazy-init="true">
+		<constructor-arg value="延迟初始化bean（延迟初始化bean告诉IoC容器在该bean第一次被请求时再来实例化，而不是在启动时实例化。）" />
+	</bean>
+	<!-- 可以在容器级别来控制延迟初始化，在<beans/>元素上使用default-lazy-init属性 -->
+	
+</beans>
