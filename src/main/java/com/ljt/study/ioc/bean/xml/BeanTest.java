@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.springframework.context.support.AbstractApplicationContext;
 
 import com.ljt.study.AbstractTest;
+import com.ljt.study.ioc.bean.xml.extend.Chinese;
 import com.ljt.study.ioc.bean.xml.scope.PrototypeBean;
 import com.ljt.study.ioc.bean.xml.scope.SingletonBean;
 
@@ -69,8 +70,24 @@ public class BeanTest extends AbstractTest {
 		System.out.println("protype两个对象相等：" + (prototypeBean1 == prototypeBean2));
 		
 		System.out.println("开始调用销毁回调方法，先实例化的后调用，prototype的bean不会调用...");
-//		((ClassPathXmlApplicationContext) this.applicationContext).destroy();
-		((AbstractApplicationContext) this.applicationContext).registerShutdownHook();
+//		((ClassPathXmlApplicationContext) applicationContext).destroy();
+		((AbstractApplicationContext) applicationContext).registerShutdownHook();
+	}
+	
+	@Test
+	public void testExtends() {
+		setApplicationContext("extends");
+		
+		Chinese chinese = applicationContext.getBean("chinese", Chinese.class);
+		System.out.println(chinese);
+		chinese = applicationContext.getBean("chineseClass", Chinese.class);
+		System.out.println(chinese);
+		
+	}
+	
+	@Test
+	public void testProcessor() {
+		setApplicationContext("processor");
 	}
 	
 }

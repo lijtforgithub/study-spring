@@ -2,7 +2,7 @@
  * @author LiJingTang
  * @version 2019年3月31日 上午10:36:05
  */
-package com.ljt.study.annotation.lifecycle;
+package com.ljt.study.ioc.bean.xml.scope;
 
 /**
 	Singleton作用域
@@ -25,16 +25,16 @@ package com.ljt.study.annotation.lifecycle;
 	就是在Spring容器实例化单例bean并解析和注入它的依赖时。如果你在运行时需要原型bean新的实例而不是仅仅一次，请参考方法注入。
 	
 	
-	
 	顶层<beans/>元素的default-init-method属性的存在，就会让Spring的IoC容器意识到在bean中的一个叫做init的方法就是初始化回调方法。
 	当一个bean被创建和装配时，如果bean类有这样一个方法，那么它就会在合适的时间被调用。
 	相似地（也就是在XML中），你可以使用顶层元素<beans/>的default-destroy-method属性来配置销毁回调方法。
 	在已经存在的bean类中，有命名差异的回调方法，你可以指定（也就是在XML中）<bean/>本身的init-method和destroy-method属性来覆盖默认的方法。
 	
-	注意Spring容器保证在bean的所有依赖都满足后立即执行配置的初始化回调。这意味着初始化回调在原生bean上调用，
-	这也意味着这个时候任何诸如AOP拦截器之类的将不能被应用。一个目标bean是首先完全创建，然后才应用诸如AOP代理等拦截器链。
-	注意，如果目标bean和代理是分开定义了，你的代码甚至可以绕开代理直接和原生bean通信。因此，在初始化方法上使用拦截器将产生未知的结果，
-	因为这将目标bean和它的代理/拦截器的生命周期绑定并且留下了和初始bean直接通信这样奇怪的方式。
+	注意Spring容器保证在bean的所有依赖都满足后立即执行配置的初始化回调。
+	这意味着初始化回调在原生bean上调用，这也意味着这个时候任何诸如AOP拦截器之类的将不能被应用。
+	一个目标bean是首先完全创建，然后才应用诸如AOP代理等拦截器链。
+	注意，如果目标bean和代理是分开定义了，你的代码甚至可以绕开代理直接和原生bean通信。
+	因此，在初始化方法上使用拦截器将产生未知的结果，因为这将目标bean和它的代理/拦截器的生命周期绑定并且留下了和初始bean直接通信这样奇怪的方式。
 	
 	调用顺序：
 	@PostConstruct

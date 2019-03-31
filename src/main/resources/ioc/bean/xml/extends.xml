@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+		
+		
+	<bean id="person" abstract="true" class="com.ljt.study.ioc.bean.xml.extend.Person">
+	    <property name="name" value="parent" />
+	    <property name="age" value="1" />
+	</bean>
+	
+	<bean id="chinese" class="com.ljt.study.ioc.bean.xml.extend.Chinese" parent="person" init-method="init">
+	    <property name="name" value="override" />
+	    <property name="complexion" value="yellow" />
+	</bean>
+	
+	<!-- 如果没有指定一个子bean使用父bean的类，但也可以覆盖它。在这种情形中，子bean的类必须和父bean兼容，也就是说，它必须接受父bean的属性值。
+	子bean的定义继承构造方法参数值，属性值，还有父bean的方法覆盖，添加新值的选择。
+	任何你指定的初始化方法，销毁方法，和/或static工厂方法设置会覆盖对应父bean中的设置。
+	剩下的设置通常是从子bean来定义：依赖，自动装配模式，依赖检测，单例，范围，延迟初始化。 -->
+	
+	<!-- 如果父bean没有指定类，那么明确地标识父bean就必须要有abstract -->
+	<bean id="withoutClass" abstract="true">
+	    <property name="name" value="parent-withoutClass" />
+	    <property name="age" value="10" />
+	    <property name="complexion" value="yellow" />
+	</bean>
+	
+	<bean id="chineseClass" class="com.ljt.study.ioc.bean.xml.extend.Chinese" parent="withoutClass" init-method="init" />
+	
+</beans>

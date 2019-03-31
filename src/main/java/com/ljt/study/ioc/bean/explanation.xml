@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	
+	<!-- id属性是一个字符串，用来标识定义的独立的bean。
+	class属性定义了bean的类型，需要使用类的完全限定名。id属性的值指的就是协作对象 -->
+    <bean id="beanId" class="com.ljt.study.ioc.bean.xml.Bean" />
+    
+    <bean id="..." class="...">
+    	<!-- id和ref元素之间的这种联系表示了两个协作对象的依赖关系 -->
+        <property name="attributeName" ref="otherBeanId" />
+        <!-- 这个bean的其它合作者和配置在这里编写 -->
+    </bean>
+    
+    
+   	<!-- 可以使用一个或多个<import/>元素来从另外的一个或多个文件中加载bean -->
+	<import resource="services.xml" />
+	<import resource="resources/messageSource.xml" />
+	<import resource="/resources/themeSource.xml" />
+	<!-- 所有的位置路径都是相对于该引用文件的，所以service.xml必须在和引用文件相同路径中或者是类路径下，
+	而messageSource.xml和themeSource.xml必须是在位于引用文件下一级的resources路径下。
+	正如你看到的，前部的斜杠被忽略了，这是由于路径都是相对的，最好就不用斜线。 -->
+	
+	
+	<!-- 在bean定义外面起别名 -->
+	<alias name="fromName" alias="toName" />
+	
+	
+	<!-- idref元素是一种简单防错的形式来传递容器中另外一个bean的id（字符串值而不是引用）到<constructor-arg/>或<property/>元素中 -->
+	<bean id="theTargetBean" class="..." />
+	<bean id="theClientBean" class="...">
+	    <property name="targetName">
+	        <idref bean="theTargetBean" />
+	    </property>
+	</bean>
+	<!-- 上面定义bean的代码片段是和下面的片段完全等价（在运行时） -->
+	<bean class="...">
+	    <property name="targetName" value="theTargetBean" />
+	</bean>
+	<!-- 第一种形式比第二种形式可取，因为使用idref标签允许容器在部署时来验证被引用的，命名的bean是否真的存在。第二种形式下，没有对传递给client bean的targetName属性执行验证。 -->
+	
+	
+	
+	<!-- 通过parent属性来指定目标bean会为bean创建引用，它是在当前容器的父容器中的。parent属性的值可能和目标bean的id属性相同，或者是目标bean的name属性值之一，
+	而且目标bean必须在当前容器的父容器中。当有一个容器继承关系，可以使用这个bean的引用，或在你想使用和父bean有相同名称的代理包装一个父容器中已有bean时。 -->
+	<!-- 在父上下文中-->
+	<bean id="accountService" class="..." />
+	<!-- 在子（后继）上下文中 -->
+	<bean id="accountService" class="org.springframework.aop.framework.ProxyFactoryBean"> <!-- bean名称和父bean相同 -->
+	    <property name="target">
+	        <ref parent="accountService"/> <!-- 注意我们如何引用父bean -->
+	    </property>
+	</bean>
+	
+</beans>
