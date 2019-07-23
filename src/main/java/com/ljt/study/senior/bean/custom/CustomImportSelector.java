@@ -1,20 +1,17 @@
 package com.ljt.study.senior.bean.custom;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
-
 import com.ljt.study.senior.bean.entity.Animal;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author LiJingTang
  * @version 2019年3月29日 下午3:45:08
  */
+@Slf4j
 public class CustomImportSelector implements ImportSelector {
 	
-	private static final Logger LOG = LoggerFactory.getLogger(CustomImportSelector.class);
-
 	/**
 	 * @param importingClassMetadata 当前标注@Import注解类的所有注解信息
 	 * 
@@ -22,7 +19,7 @@ public class CustomImportSelector implements ImportSelector {
 	 */
 	@Override
 	public String[] selectImports(AnnotationMetadata importingClassMetadata) {
-		LOG.debug(importingClassMetadata.getAnnotationTypes().toString());
+		log.debug(importingClassMetadata.getAnnotationTypes().toString());
 		
 		return new String[] {Animal.class.getName()};
 	}
