@@ -105,10 +105,10 @@ public class DelayConfig {
     }
     
     @Bean
-    public SimpleMessageListenerContainer buildResultRecvContainer(Queue consumerQueue, MessageConsumer messageConsumer) {
+    public SimpleMessageListenerContainer buildResultRecvContainer(Queue consumerQueue, ConsumerListener consumerListener) {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer(connectionFactory);
         container.setQueues(consumerQueue);
-        container.setMessageListener(messageConsumer);
+        container.setMessageListener(consumerListener);
         return container;
     }
 

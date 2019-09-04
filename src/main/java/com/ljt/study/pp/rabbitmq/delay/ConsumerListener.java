@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Component
-public class MessageConsumer implements MessageListener {
+public class ConsumerListener implements MessageListener {
     
     static CountDownLatch cdLatch;
 
