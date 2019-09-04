@@ -22,7 +22,6 @@ public class ClientTest {
     @Test
     public void testCount() {
         Jedis jedis = new Jedis(LOCAL_HOST, REDIS_DEF_PORT, 10000);
-        jedis.auth("lijt");
         
         long startTime = System.currentTimeMillis();
         long endTime = 0L;
