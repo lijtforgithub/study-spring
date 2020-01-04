@@ -1,20 +1,19 @@
 package com.ljt.study.ioc.bean.annotation;
 
-import org.junit.Test;
-
 import com.ljt.study.AbstractTest;
+import org.junit.Test;
 
 /**
  * @author LiJingTang
- * @version 2019年3月31日 下午10:19:08
+ * @date 2020-01-04 11:05
  */
 public class AnnotationBeanTest extends AbstractTest {
-	
-	@Test
-	public void testComponentScan() {
-		setApplicationContext("component-scan");
-		
-		printBeanDefinition();
-	}
+
+    @Test
+    public void testComponentScan() {
+        setApplicationContext("component-scan");
+
+        printBeanDefinition();
+    }
 
 }

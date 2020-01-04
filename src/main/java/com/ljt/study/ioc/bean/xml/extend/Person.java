@@ -1,34 +1,19 @@
 package com.ljt.study.ioc.bean.xml.extend;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
  * @author LiJingTang
- * @version 2015年8月25日 下午9:13:32
+ * @date 2020-01-04 10:55
  */
+@Getter
+@Setter
+@ToString
 public class Person {
-	
-	private String name;
-	private int age;
-	
-	public Person() {
-//		System.out.println(this.getClass().getName() + "无参构造方法实例化");
-	}
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getAge() {
-		return age;
-	}
-	public void setAge(int age) {
-		this.age = age;
-	}
-	
-	@Override
-	public String toString() {
-		return "Person [name=" + name + ", age=" + age + "]";
-	}
-	
+
+    private String name;
+    private int age;
+
 }

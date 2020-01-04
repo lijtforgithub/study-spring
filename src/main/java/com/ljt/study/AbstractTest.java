@@ -1,14 +1,15 @@
 package com.ljt.study;
 
-import java.util.Objects;
-import java.util.stream.Stream;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import lombok.extern.slf4j.Slf4j;
+
+import java.util.Objects;
+import java.util.stream.Stream;
 
 /**
  * @author LiJingTang
- * @version 2019年3月28日 下午8:59:37
+ * @date 2020-01-03 20:47
  */
 @Slf4j
 public abstract class AbstractTest {

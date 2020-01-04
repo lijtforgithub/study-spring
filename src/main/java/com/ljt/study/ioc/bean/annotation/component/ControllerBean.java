@@ -4,10 +4,8 @@ import org.springframework.stereotype.Controller;
 
 /**
  * @author LiJingTang
- * @version 2015年8月28日 下午10:43:32
+ * @date 2020-01-04 11:06
  */
-
 @Controller
 public class ControllerBean {
-	
 }

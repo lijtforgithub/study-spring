@@ -42,14 +42,14 @@
     <bean name="p-namespace" class="com.ljt.study.ioc.bean.xml.Bean" p:emptyString="emptyString"/>
         
     <bean class="com.ljt.study.ioc.di.xml.SetterBean"
-    	p:data="用 p-命令空间代替property标签描述属性的值和/或协作的bean"
+    	p:explain="用 p-命令空间代替property标签描述属性的值和/或协作的bean"
     	p:bean-ref="pnsCollaboratorsBean" />
     
     
     <!-- 用内c-命名空间代替constructor-arg配置构造方法参数  -->
     <bean class="com.ljt.study.ioc.di.xml.ConstructorBean" 
     	c:bean-ref="cnsCollaboratorsBean" 
-    	c:data="c-命名空间代替constructor-arg配置构造方法参数" />
+    	c:explain="c-命名空间代替constructor-arg配置构造方法参数" />
     <!-- 因为XML的语法，索引符号需要在其头部使用_作为XML属性名称，因为XML中属性是不能以数字开头的（尽管一些IDE允许这样做
 	在实际运用中，构造方法解析机制在匹配参数时是非常有效率的，所以除非真有需要，我们建议在配置中使用名称符号。 -->
     <bean id="foo" class="com.ljt.study.ioc.di.xml.ConstructorBean" 
