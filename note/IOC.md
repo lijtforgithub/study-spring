@@ -13,7 +13,7 @@ ApplicationContext是BeanFactory的子接口。它添加了和Spring的AOP特性
 
  BeanFactory 还是 ApplicationContext?  
 简单的说：除非你有更好的理由，否则尽量使用ApplicationContext，下面是对于哪些"为什么"等等更深入的建议。ApplicationContext包含BeanFactory的所有功能。通常建议比BeanFactory优先，除非有一些限制的场合如字节长度对内存有很大的影响时（Applet）。然后，绝大多数"典型的"企业应用和系统，ApplicationContext就是你需要使用的。
-Spring2.0及以上版本，	大量使用了link <linkend="beans-factory-extension-bpp">BeanPostProcessor扩展（以便应用代理等功能），
+Spring2.0及以上版本，	大量使用了link `<linkend="beans-factory-extension-bpp">` BeanPostProcessor扩展（以便应用代理等功能），
 如果你选择BeanFactory则无法使用相当多的支持功能，如事务和AOP，这可能会导致混乱，因为配置并没有错误。
 #### PropertyPlaceholderConfigurer
 PropertyPlaceholderConfigurer不仅仅查看在Properties文件中指定的属性。默认情况下，如果它不能在指定的属性文件中发现属性，它也会检查Java System属性。你可以通过设置systemPropertiesMode属性，使用下面整数的三者之一来自定义这种行为：
@@ -43,7 +43,7 @@ Spring中对单例bean的概念和四人帮（Gang of Four，GoF）设计模式�
 
 当你使用单例范围的bean和其依赖是原型范围的bean时，要当心依赖是在实例化时被解析的。因此，如果依赖注入了原型范围的bean到单例范围的bean中，新的原型bean就被实例化并且依赖注入到单例bean中。原型实例是唯一的实例并不断提供给单例范围的bean。假设你想单例范围的bean在运行时可以重复获得新的原型范围bean的实例。那么就不能将原型范围的bean注入到单例bean中，因为这个注入仅仅发生一次，就是在Spring容器实例化单例bean并解析和注入它的依赖时。如果你在运行时需要原型bean新的实例而不是仅仅一次，请参考方法注入。
 
-顶层\<beans/>元素的default-init-method属性的存在，就会让Spring的IoC容器意识到在bean中的一个叫做init的方法就是初始化回调方法。当一个bean被创建和装配时，如果bean类有这样一个方法，那么它就会在合适的时间被调用。相似地（也就是在XML中），你可以使用顶层元素\<beans/>的default-destroy-method属性来配置销毁回调方法。在已经存在的bean类中，有命名差异的回调方法，你可以指定（也就是在XML中）\<bean/>本身的init-method和destroy-method属性来覆盖默认的方法。
+顶层`<beans/>`元素的default-init-method属性的存在，就会让Spring的IoC容器意识到在bean中的一个叫做init的方法就是初始化回调方法。当一个bean被创建和装配时，如果bean类有这样一个方法，那么它就会在合适的时间被调用。相似地（也就是在XML中），你可以使用顶层元素`<beans/>`的default-destroy-method属性来配置销毁回调方法。在已经存在的bean类中，有命名差异的回调方法，你可以指定（也就是在XML中）`<bean/>`本身的init-method和destroy-method属性来覆盖默认的方法。
 
 注意Spring容器保证在bean的所有依赖都满足后立即执行配置的初始化回调。  
 这意味着初始化回调在原生bean上调用，这也意味着这个时候任何诸如AOP拦截器之类的将不能被应用。
@@ -60,7 +60,7 @@ Spring中对单例bean的概念和四人帮（Gang of Four，GoF）设计模式�
 1. 基于构造方法的依赖注入  
 基于构造方法的依赖注入是容器调用构造方法和一组参数完成的，每个都表示着一个依赖。
 - 构造方法参数解析  
-构造方法参数解析匹配使用参数的类型。如果在bean的构造方法参数不存在潜在的歧义，那么当bean被实例化的时候，定义的构造方法参数的顺序就是被提供到适当构造方法参数的顺序。当使用简单类型时，比如\<value>true\<value>，Spring不能决定值的类型，所以没有帮助是不能匹配的。
+构造方法参数解析匹配使用参数的类型。如果在bean的构造方法参数不存在潜在的歧义，那么当bean被实例化的时候，定义的构造方法参数的顺序就是被提供到适当构造方法参数的顺序。当使用简单类型时，比如`<value>true<value>`，Spring不能决定值的类型，所以没有帮助是不能匹配的。
 - 构造方法参数名称  
 要记住要使得这种方式可用，代码必须和内嵌的调试标识一起编译，那样Spring才可以从构造方法中来查找参数。如果没有和调试标识（或不想）一起编译，那么可以使用JDK的注解@ConstructorProperties来明确构造方法参数。
 2. 基于setter方法的依赖注入  
@@ -84,7 +84,7 @@ ApplicationContext对它管理的bean支持基于构造方法和setter方法的�
 #### 集合
 abstract="true" 使用abstract属性显式地将父bean定义标记为抽象的。由于这样的父bean是不完整的，而且还被显式标记为抽象的，因而它无法得到自己的实例。抽象bean定义可作为子bean定义的模板。若要尝试单独使用这样的父bean（比如将它作为其他bean的ref属性而引用，或者直接使用这个父bean的id作为参数调用getBean()方法），将会导致错误。
 
-在\<list/>元素特定的情形下，和List集合类型相关的语义，也就是说，ordered集合值的概念，是要维护的；父值优先于所有子list的值。在Map，Set和Properties集合类型的情况下，没有顺序的存在。因此对于容器内部使用的，和Map，Set和Properties实现类型相关的集合类型没有排序语义的作用。
+在`<list/>`元素特定的情形下，和List集合类型相关的语义，也就是说，ordered集合值的概念，是要维护的；父值优先于所有子list的值。在Map，Set和Properties集合类型的情况下，没有顺序的存在。因此对于容器内部使用的，和Map，Set和Properties实现类型相关的集合类型没有排序语义的作用。
 
 集合合并的限制:不能合并不同类型的集合（比如Map和List），如果你要尝试这么去做，那么就会抛出Exception。merge属性必须在低级的，继承的，子bean中来指定；在父集合中指定merge属性是冗余的，也不会看到想要的合并结果。
 #### 自动装配协作者
@@ -98,29 +98,29 @@ Spring以相同名称来查找需要被自动装配的bean。比如，如果bean
 4. constructor：和byType类似，但是是应用于构造方法参数的。如果在容器中没有确定的构造方法参数类型的bean的存在，就会发生致命的错误。
 
 从自动装配中排除bean  
-在每个bean的基础上，你可以从自动装配中来排除bean。在Spring的XML格式配置中，设置\<bean/>元素的autowire-candidate属性为false；容器会把指定的bean对自动装配不可用（包含注解风格的配置，比如@Autowired）。你也可以基于bean名称的模式匹配来限制自动装配候选者。  
-顶级的\<beans/>元素中的default-autowire-candidates属性接受一个或多个模式。这并不意味着未包含的bean不能使用自动装配来配置。相反，bean本身不是自动装配其它bean的候选者。
+在每个bean的基础上，你可以从自动装配中来排除bean。在Spring的XML格式配置中，设置`<bean/>`元素的autowire-candidate属性为false；容器会把指定的bean对自动装配不可用（包含注解风格的配置，比如@Autowired）。你也可以基于bean名称的模式匹配来限制自动装配候选者。  
+顶级的`<beans/>`元素中的default-autowire-candidates属性接受一个或多个模式。这并不意味着未包含的bean不能使用自动装配来配置。相反，bean本身不是自动装配其它bean的候选者。
 
 - 使用@Autowired、@Inject注解，需要在Spring容器中声明AutowiredAnnotationBeanPostProcessor Bean。  
-传统的声明方式：\<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+传统的声明方式：`<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />`
 - 使用@PersistenceContext注解，需要在Spring器中声明PersistenceAnnotationBeanPostProcessor Bean。  
-传统的声明：\<bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor" />
+传统的声明：`<bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor" />`
 - 使用@Required注解，需要在Spring容器中声明RequiredAnnotationBeanPostProcessor Bean。  
-传统声明方式： \<bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor" />
+传统声明方式： `<bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor" />`
 - 使用@Resource、@ PostConstruct、@ PreDestroy等注解就必须声明CommonAnnotationBeanPostProcessor。  
-传统申明方式： \<bean class="org.springframework.beans.factory.annotation.CommonAnnotationBeanPostProcessor" />
+传统申明方式： `<bean class="org.springframework.beans.factory.annotation.CommonAnnotationBeanPostProcessor" />`
 
 基础的bean的定义都是在XML文件中来明确定义的，而注解仅仅进行依赖注入。
 
-<context:annotation-config />隐式注册的后处理器包含AutowiredAnnotationBeanPostProcessor，CommonAnnotationBeanPostProcessor，PersistenceAnnotationBeanPostProcessor，RequiredAnnotationBeanPostProcessor
+`<context:annotation-config />`隐式注册的后处理器包含AutowiredAnnotationBeanPostProcessor，CommonAnnotationBeanPostProcessor，PersistenceAnnotationBeanPostProcessor，RequiredAnnotationBeanPostProcessor
 
-<context:annotation-config />仅能够在已经在已经注册过的bean上面起作用。对于没有在spring容器中注册的bean，它并不能执行任何操作。
+`<context:annotation-config />`仅能够在已经在已经注册过的bean上面起作用。对于没有在spring容器中注册的bean，它并不能执行任何操作。
 
-\<context:component-scan>除了具有
-<context:annotation-config />的功能之外，还具有自动将带有@component,@service,@Repository等注解的对象注册到spring容器中的功能。
+`<context:component-scan>`除了具有
+`<context:annotation-config />`的功能之外，还具有自动将带有@component,@service,@Repository等注解的对象注册到spring容器中的功能。
 
-\<context:annotation-config/>仅仅查找定义在同一上下文中的bean的注解。这就意味着，如果你为DispatcherServlet将
-\<context:annotation-config/>放置在WebApplicationContext中，那么它仅仅检查控制器中的@Autowired bean，而不是你的服务层bean。
+`<context:annotation-config />`仅仅查找定义在同一上下文中的bean的注解。这就意味着，如果你为DispatcherServlet将
+`<context:annotation-config />`放置在WebApplicationContext中，那么它仅仅检查控制器中的@Autowired bean，而不是你的服务层bean。
 
 @Autowired和@Inject的报错信息完全相同，他们都是通过 AutowiredAnnotationBeanPostProcessor类实现的依赖注入，二者具有可互换性。 @Resource通过CommonAnnotationBeanPostProcessor类实现依赖注入@Autowired，@Inject，@Resource和@Value注解是由Spring的BeanPostProcessor实现类来控制的，反过来告诉你你不能在BeanPostProcessor或BeanFactoryPostProcessor类型（任意之一）应用这些注解。这些类型必须明确地通过XML或使用Spring的@Bean方法来装配。
 
