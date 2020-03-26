@@ -10,7 +10,7 @@
 	
 	<!-- 创建一个bean定义，其实质是用该bean定义对应的类来创建真正实例的配方。
 		把bean定义看成一个配方很有意义，它与class很类似，只根据一张处方就可以创建多个实例。 -->
-	<bean id="beanId" class="com.ljt.study.ioc.bean.xml.Bean" />
+	<bean id="beanId" name="b1, b2" class="com.ljt.study.ioc.bean.xml.Bean" />
 	<!-- 在bean定义外面起别名 -->
 	<alias name="beanId" alias="aliasBeanName" />
 	

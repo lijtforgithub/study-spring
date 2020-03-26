@@ -21,6 +21,7 @@ public class XMLBeanTest extends AbstractTest {
         Bean bean1 = applicationContext.getBean("beanId", Bean.class);
         Bean bean2 = applicationContext.getBean("aliasBeanName", Bean.class);
         System.out.println("测试在bean定义外面起别名：" + (bean1 == bean2));
+        System.out.println(bean1 == applicationContext.getBean("b1", Bean.class));
     }
 
     @Test
