@@ -9,7 +9,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
  * @date 2020-01-04 09:58
  */
 @Slf4j
-public class CustomBeanPostProcessor  implements BeanPostProcessor {
+public class CustomBeanPostProcessor implements BeanPostProcessor {
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
