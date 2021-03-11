@@ -2,6 +2,7 @@
 
 #### IOC-控制反转 DI-依赖注入
 依赖注入（DI）是对象定义它们依赖的过程，也就是说，要和它们协同工作其它对象，仅仅可以通过构造方法参数，工厂方法参数，或者是在工厂方法返回的对象或被构造好后，为对象实例设置的属性。容器当创建好bean，随后就会注入那些依赖。这个过程从根本上来说是反向的，因此命名为控制反转（IoC），bean本身直接使用构造好的类或服务定位器模式来控制实例或它的依赖的所在位置。
+> IOC是思想 DI是手段
 #### BeanFactory&ApplicationContext
 BeanFactory接口提供高级的配置机制，可以管理任意类型的对象。
 ApplicationContext是BeanFactory的子接口。它添加了和Spring的AOP特性很简便的整合；消息资源处理（用于国际化i18n），事件发布；应用层特定的上下文，比如用于Web应用程序的WebApplicationContext。

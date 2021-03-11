@@ -2,7 +2,7 @@ package com.ljt.study.pp.value;
 
 import com.ljt.study.AbstractTest;
 import org.apache.commons.io.FileUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.IOException;

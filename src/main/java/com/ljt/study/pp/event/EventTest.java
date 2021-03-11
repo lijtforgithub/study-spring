@@ -1,18 +1,19 @@
 package com.ljt.study.pp.event;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 
 /**
  * @author LiJingTang
  * @date 2020-01-21 08:36
  */
-@RunWith(SpringRunner.class)
-@ContextConfiguration(classes = EventConfig.class)
-public class EventTest extends AbstractJUnit4SpringContextTests {
+@SpringBootTest(classes = EventConfig.class)
+public class EventTest {
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     @Test
     public void publish() {

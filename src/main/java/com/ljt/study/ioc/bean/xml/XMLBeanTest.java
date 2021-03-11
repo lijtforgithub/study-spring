@@ -4,7 +4,7 @@ import com.ljt.study.AbstractTest;
 import com.ljt.study.ioc.bean.xml.extend.Chinese;
 import com.ljt.study.ioc.bean.xml.scope.PrototypeBean;
 import com.ljt.study.ioc.bean.xml.scope.SingletonBean;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.support.AbstractApplicationContext;
 
 /**

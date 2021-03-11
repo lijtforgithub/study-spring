@@ -1,17 +1,14 @@
 package com.ljt.study.pp.lookup;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  * @author LiJingTang
  * @date 2020-01-04 09:33
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = LookUpConfig.class)
+@SpringBootTest(classes = LookUpConfig.class)
 public class LookUpTest {
 
     @Autowired

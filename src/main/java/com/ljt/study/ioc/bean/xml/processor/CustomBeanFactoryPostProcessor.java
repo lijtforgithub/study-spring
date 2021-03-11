@@ -11,6 +11,10 @@ import org.springframework.core.Ordered;
  */
 public class CustomBeanFactoryPostProcessor implements BeanFactoryPostProcessor, Ordered {
 
+    public CustomBeanFactoryPostProcessor() {
+        System.out.println("被实例化了");
+    }
+
     @Override
     public int getOrder() {
         return Ordered.HIGHEST_PRECEDENCE;

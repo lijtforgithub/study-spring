@@ -1,7 +1,7 @@
 package com.ljt.study.pp.conditional;
 
 import com.ljt.study.AbstractTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**

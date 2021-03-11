@@ -1,7 +1,7 @@
 package com.ljt.study.ioc.bean.annotation;
 
 import com.ljt.study.AbstractTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author LiJingTang

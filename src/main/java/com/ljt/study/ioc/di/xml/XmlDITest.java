@@ -1,7 +1,7 @@
 package com.ljt.study.ioc.di.xml;
 
 import com.ljt.study.AbstractTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 
 /**

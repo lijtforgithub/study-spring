@@ -2,7 +2,7 @@ package com.ljt.study.pp.scope;
 
 import com.ljt.study.AbstractTest;
 import com.ljt.study.entity.User;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**

@@ -20,3 +20,4 @@ This is because in almost all cases when using {@ComponentScan}, default annotat
 7. @PreDestroy
 8. DisposableBean.destroy
 9. destroyMethod
+#### EmbeddedValueResolverAware
