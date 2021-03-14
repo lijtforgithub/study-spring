@@ -1,7 +1,9 @@
 package com.ljt.study.code;
 
+import com.ljt.study.code.bfpp.CustomBeanFactoryPostProcessor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -20,16 +22,27 @@ public class MyClassPathXmlApplicationContext extends ClassPathXmlApplicationCon
 
     @Override
     protected void initPropertySources() {
-        log.info("自定义 initPropertySources");
+        log.info("扩展 initPropertySources");
         getEnvironment().setRequiredProperties("OS");
     }
 
     @Override
     protected void customizeBeanFactory(DefaultListableBeanFactory beanFactory) {
-        log.info("自定义 customizeBeanFactory");
+        log.info("扩展 customizeBeanFactory");
         super.setAllowBeanDefinitionOverriding(Boolean.TRUE);
         super.setAllowCircularReferences(Boolean.TRUE);
         super.customizeBeanFactory(beanFactory);
+        /*
+         * PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(beanFactory, getBeanFactoryPostProcessors())
+         * 此种方式启动流程中getBeanFactoryPostProcessors()有值
+         */
+        super.addBeanFactoryPostProcessor(new CustomBeanFactoryPostProcessor());
+        log.info("添加 CustomBeanFactoryPostProcessor");
+    }
+
+    @Override
+    protected void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {
+        log.info("扩展 postProcessBeanFactory");
     }
 
 }

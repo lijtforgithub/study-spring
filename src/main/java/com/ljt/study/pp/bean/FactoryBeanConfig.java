@@ -27,7 +27,7 @@ class UserFactoryBean implements FactoryBean<User> {
 
     @Override
     public User getObject() {
-        log.info("容器getBean()的时候才会创建User的实例，例如有其他bean需要注入该bean");
+        log.debug("FactoryBean方式创建bean，延迟创建：容器getBean()的时候才会创建User的实例，例如有其他bean依赖该bean");
         return new User();
     }
 

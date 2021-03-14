@@ -1,9 +1,9 @@
 package com.ljt.study.pp.value;
 
-import com.ljt.study.AbstractTest;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -12,12 +12,14 @@ import java.nio.charset.StandardCharsets;
  * @author LiJingTang
  * @date 2020-01-03 21:29
  */
-public class ValueTest extends AbstractTest {
+@SpringJUnitConfig(ValueConfig.class)
+public class ValueTest {
+
+    @Autowired
+    private ValueConfig config;
 
     @Test
     public void test() throws IOException {
-        applicationContext = new AnnotationConfigApplicationContext(ValueConfig.class);
-        ValueConfig config = applicationContext.getBean(ValueConfig.class);
         System.out.println(config);
 
         System.out.println(config.getNormal());

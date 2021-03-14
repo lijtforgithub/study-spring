@@ -84,9 +84,4 @@ public class XMLBeanTest extends AbstractTest {
         System.out.println(chinese);
     }
 
-    @Test
-    public void testProcessor() {
-        setApplicationContext("processor");
-    }
-
 }

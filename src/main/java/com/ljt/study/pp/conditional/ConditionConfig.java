@@ -23,7 +23,7 @@ public class ConditionConfig {
 
     @Bean
     @Conditional(ConditionOnLinux.class)
-    public User LinusTorvalds() {
+    public User linusTorvalds() {
         User user = new User();
         user.setName("林纳斯·托瓦兹");
 

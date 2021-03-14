@@ -17,29 +17,46 @@ import org.springframework.core.io.Resource;
 @PropertySource("classpath:pp/config.properties")
 public class ValueConfig {
 
+    /**
+     * 注入普通字符串
+     */
     @Value("normal")
-    private String normal; // 注入普通字符串
-
+    private String normal;
+    /**
+     * 默认值
+     */
     @Value("${pp:培培}")
-    private String def;     // 默认值
-
+    private String def;
+    /**
+     * 注入操作系统属性
+     */
     @Value("#{systemProperties['os.name']}")
-    private String systemPropertiesName; // 注入操作系统属性
-
+    private String systemPropertiesName;
+    /**
+     * 注入表达式结果
+     */
     @Value("#{ T(java.lang.Math).random() * 100.0 }")
-    private double randomNumber; //注入表达式结果
-
+    private double randomNumber;
+    /**
+     * 注入资源文件属性
+     */
     @Value("${说明}")
-    private String explanation; // 注入资源文件属性
-
+    private String explanation;
+    /**
+     * 注入文件资源
+     */
     @Value("classpath:pp/config.properties")
-    private Resource resourceFile; // 注入文件资源
-
+    private Resource resourceFile;
+    /**
+     * 注入URL资源
+     */
     @Value("http://www.baidu.com")
-    private Resource testUrl; // 注入URL资源
-
+    private Resource testUrl;
+    /**
+     * 注入其他Bean属性：注入beanInject对象的属性another，类具体定义见下面
+     */
     @Value("#{beanInject.another}")
-    private String fromAnotherBean; // 注入其他Bean属性：注入beanInject对象的属性another，类具体定义见下面
+    private String fromAnotherBean;
 
     @Bean
     public BeanInject beanInject() {

@@ -31,12 +31,12 @@ class CustomImportSelector implements ImportSelector {
      */
     @Override
     public String[] selectImports(AnnotationMetadata importingClassMetadata) {
-        log.debug(importingClassMetadata.getAnnotationTypes().toString());
+        log.debug("@Import + ImportSelector 方式创建bean");
 
         return new String[]{Animal.class.getName()};
     }
 }
-
+@Slf4j
 class CustomImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar {
 
     /**
@@ -46,6 +46,7 @@ class CustomImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistr
     @Override
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
         // 指定bean名
+        log.debug("@Import + ImportBeanDefinitionRegistrar 方式创建bean");
         registry.registerBeanDefinition("import_registry_user", new RootBeanDefinition(User.class));
     }
 }

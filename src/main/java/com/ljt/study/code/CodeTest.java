@@ -20,6 +20,11 @@ public class CodeTest extends AbstractTest {
     }
 
     @Test
+    public void testBfpp() {
+        setApplicationContext("bfpp");
+    }
+
+    @Test
     public void testTag() {
         setApplicationContext("tag");
         System.out.println(applicationContext.getBean(User.class));

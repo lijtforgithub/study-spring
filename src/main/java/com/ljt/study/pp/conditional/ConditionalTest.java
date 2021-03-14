@@ -2,7 +2,6 @@ package com.ljt.study.pp.conditional;
 
 import com.ljt.study.AbstractTest;
 import org.junit.jupiter.api.Test;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
  * @author LiJingTang
@@ -12,7 +11,7 @@ public class ConditionalTest extends AbstractTest {
 
     @Test
     public void testCondition() {
-        applicationContext = new AnnotationConfigApplicationContext(ConditionConfig.class);
+        setApplicationContext(ConditionConfig.class);
         printBeanDefinition();
     }
 

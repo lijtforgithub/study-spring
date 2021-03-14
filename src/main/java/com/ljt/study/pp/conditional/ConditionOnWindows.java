@@ -10,7 +10,7 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
  */
 public class ConditionOnWindows implements Condition {
 
-    private static final String WINDOWS = "Windows";
+    private static final String OS = "Windows";
     private static final String OS_NAME = "os.name";
 
     /**
@@ -19,7 +19,7 @@ public class ConditionOnWindows implements Condition {
      */
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-        return context.getEnvironment().getRequiredProperty(OS_NAME).contains(WINDOWS);
+        return context.getEnvironment().getRequiredProperty(OS_NAME).contains(OS);
     }
 
 }

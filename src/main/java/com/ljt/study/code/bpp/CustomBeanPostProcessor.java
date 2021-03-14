@@ -1,4 +1,4 @@
-package com.ljt.study.ioc.bean.xml.processor;
+package com.ljt.study.code.bpp;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;

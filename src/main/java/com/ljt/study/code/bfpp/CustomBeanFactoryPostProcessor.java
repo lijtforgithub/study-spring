@@ -1,28 +1,24 @@
-package com.ljt.study.ioc.bean.xml.processor;
+package com.ljt.study.code.bfpp;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.core.Ordered;
 
 /**
  * @author LiJingTang
  * @date 2020-01-04 10:58
  */
-public class CustomBeanFactoryPostProcessor implements BeanFactoryPostProcessor, Ordered {
+@Slf4j
+public class CustomBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
 
     public CustomBeanFactoryPostProcessor() {
-        System.out.println("被实例化了");
-    }
-
-    @Override
-    public int getOrder() {
-        return Ordered.HIGHEST_PRECEDENCE;
+        log.info("{} 调用构造方法", this.getClass().getName());
     }
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        System.out.println(this.getClass() + " => postProcessBeanFactory");
+        log.info("{} 调用postProcessBeanFactory", this.getClass().getName());
     }
 
 }

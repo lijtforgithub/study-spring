@@ -16,7 +16,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class SingletonContextGetBean {
 
-    // 第一种解决办法
+    /**
+     * 第一种解决办法
+     */
     @Autowired
     private ApplicationContext applicationContext;
 

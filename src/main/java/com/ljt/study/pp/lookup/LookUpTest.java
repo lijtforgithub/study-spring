@@ -2,13 +2,13 @@ package com.ljt.study.pp.lookup;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * @author LiJingTang
  * @date 2020-01-04 09:33
  */
-@SpringBootTest(classes = LookUpConfig.class)
+@SpringJUnitConfig(LookUpConfig.class)
 public class LookUpTest {
 
     @Autowired
