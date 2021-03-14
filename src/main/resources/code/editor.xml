@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="com.ljt.study.entity.User">
+        <property name="id" value="1"/>
+        <property name="name" value="自定义属性编辑器"/>
+        <property name="address" value="安徽省_阜阳市_颍东区"/>
+    </bean>
+
+    <!-- 两种方式 -->
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <!--<property name="propertyEditorRegistrars">
+            <list>
+                <bean class="com.ljt.study.code.editor.CustomPropertyEditorRegistrar"/>
+            </list>
+        </property>-->
+        <property name="customEditors">
+            <map>
+                <entry key="com.ljt.study.entity.Address" value="com.ljt.study.code.editor.AddressEditor"/>
+            </map>
+        </property>
+    </bean>
+
+</beans>

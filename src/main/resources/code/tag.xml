@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:cts="http://www.ljt.com/schema/custom"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.ljt.com/schema/custom
+		http://www.ljt.com/schema/custom.xsd">
+
+	<cts:user id="1" name="自定义标签" password="hello spring" />
+
+</beans>
