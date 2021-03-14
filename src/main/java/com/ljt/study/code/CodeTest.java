@@ -21,7 +21,7 @@ public class CodeTest extends AbstractTest {
 
     @Test
     public void testBfpp() {
-        setApplicationContext("bfpp");
+        new MyClassPathXmlApplicationContext("classpath:code/bfpp.xml");
     }
 
     @Test

@@ -1,6 +1,6 @@
 package com.ljt.study.code;
 
-import com.ljt.study.code.bfpp.CustomBeanFactoryPostProcessor;
+import com.ljt.study.code.bfpp.CustomBeanDefinitionRegistryPostProcessor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -36,8 +36,8 @@ public class MyClassPathXmlApplicationContext extends ClassPathXmlApplicationCon
          * PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(beanFactory, getBeanFactoryPostProcessors())
          * 此种方式启动流程中getBeanFactoryPostProcessors()有值
          */
-        super.addBeanFactoryPostProcessor(new CustomBeanFactoryPostProcessor());
-        log.info("添加 CustomBeanFactoryPostProcessor");
+        super.addBeanFactoryPostProcessor(new CustomBeanDefinitionRegistryPostProcessor());
+        log.info("添加 CustomBeanDefinitionRegistryPostProcessor");
     }
 
     @Override
