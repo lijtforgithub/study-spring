@@ -13,12 +13,12 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 public class CustomBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
 
     public CustomBeanFactoryPostProcessor() {
-        log.info("{} 调用构造方法", this.getClass().getName());
+        log.info("{} 执行构造方法", this.getClass().getSimpleName());
     }
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        log.info("{} 调用postProcessBeanFactory", this.getClass().getName());
+        log.info("{} 调用postProcessBeanFactory", this.getClass().getSimpleName());
     }
 
 }

@@ -3,7 +3,6 @@ package com.ljt.study.code;
 import com.ljt.study.AbstractTest;
 import com.ljt.study.entity.User;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 
 /**
  * @author LiJingTang
@@ -13,10 +12,7 @@ public class CodeTest extends AbstractTest {
 
     public static void main(String[] args) {
         System.setProperty("ctx", "context");
-        MyClassPathXmlApplicationContext context = new MyClassPathXmlApplicationContext("classpath:code/application-${ctx}.xml");
-        for (BeanFactoryPostProcessor bfpp : context.getBeanFactoryPostProcessors()) {
-            System.out.println(bfpp.getClass());
-        }
+        new MyClassPathXmlApplicationContext("classpath:code/application-${ctx}.xml");
     }
 
     @Test
