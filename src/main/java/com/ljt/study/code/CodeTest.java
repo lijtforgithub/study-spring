@@ -3,16 +3,22 @@ package com.ljt.study.code;
 import com.ljt.study.AbstractTest;
 import com.ljt.study.entity.User;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
 
 /**
+ * ComponentScanBeanDefinitionParser
+ * ConfigurationClassPostProcessor
+ *
  * @author LiJingTang
  * @date 2021-03-12 09:50
  */
 public class CodeTest extends AbstractTest {
 
-    public static void main(String[] args) {
+    @Test
+    public void testContext() {
         System.setProperty("ctx", "context");
-        new MyClassPathXmlApplicationContext("classpath:code/application-${ctx}.xml");
+        ApplicationContext context = new MyClassPathXmlApplicationContext("classpath:code/application-${ctx}.xml");
+        System.out.println(context);
     }
 
     @Test
