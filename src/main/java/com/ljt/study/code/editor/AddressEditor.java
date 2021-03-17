@@ -12,7 +12,7 @@ import java.beans.PropertyEditorSupport;
  */
 public class AddressEditor extends PropertyEditorSupport {
 
-    private static final String SEP = "_";
+    public static final String SEP = "_";
 
     @Override
     public void setAsText(String text) throws IllegalArgumentException {
