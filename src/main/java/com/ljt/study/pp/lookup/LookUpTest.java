@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
+ * 单例引用原型
+ *
  * @author LiJingTang
  * @date 2020-01-04 09:33
  */
