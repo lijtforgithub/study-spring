@@ -38,12 +38,12 @@ public abstract class AbstractTest {
         String configLocations = pckSuffix.replaceAll("\\.", "/") + "/" + fileName + SUFFIX;
         applicationContext = new ClassPathXmlApplicationContext(configLocations);
 
-        log.debug("----------- 容器启动完成【{}】", configLocations);
+        log.debug("【{}】容器启动完成\n", configLocations);
     }
     protected void setApplicationContext(Class<?> clazz) {
         applicationContext = new AnnotationConfigApplicationContext(clazz);
 
-        log.debug("----------- 容器启动完成【{}】", clazz.getSimpleName());
+        log.debug("【{}】容器启动完成\n", clazz.getSimpleName());
     }
 
 }

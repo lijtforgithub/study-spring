@@ -1,6 +1,10 @@
 package com.ljt.study.code;
 
 import com.ljt.study.AbstractTest;
+import com.ljt.study.code.bfpp.supplier.BfppSupplierConfig;
+import com.ljt.study.code.bpp.Bpp;
+import com.ljt.study.code.bpp.instantiation.InstantiationAwareBppConfig;
+import com.ljt.study.code.replacemethod.OriginalHello;
 import com.ljt.study.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
@@ -51,6 +55,35 @@ public class CodeTest extends AbstractTest {
         ConversionService conversionService = applicationContext.getBean(ConversionService.class);
         User user = conversionService.convert("1_璟瑜", User.class);
         System.out.println(user);
+    }
+
+    @Test
+    public void testReplaceMethod() {
+        setApplicationContext("replace-method");
+        OriginalHello hello = applicationContext.getBean(OriginalHello.class);
+        hello.sayHello();
+        hello.sayHello("璟瑜");
+    }
+
+    @Test
+    public void testBpp() {
+        setApplicationContext("bpp");
+        Bpp bean = applicationContext.getBean(Bpp.class);
+        bean.doSomething();
+    }
+
+    @Test
+    public void testInstantiationAwareBpp() {
+        setApplicationContext(InstantiationAwareBppConfig.class);
+        Bpp bean = applicationContext.getBean(Bpp.class);
+        bean.doSomething();
+    }
+
+    @Test
+    public void testBfppSupplier() {
+        setApplicationContext(BfppSupplierConfig.class);
+        User bean = applicationContext.getBean(User.class);
+        System.out.println(bean.getName());
     }
 
 }
