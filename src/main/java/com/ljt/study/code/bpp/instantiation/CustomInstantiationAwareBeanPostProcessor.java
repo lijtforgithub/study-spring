@@ -1,6 +1,7 @@
 package com.ljt.study.code.bpp.instantiation;
 
 import com.ljt.study.code.bpp.Bpp;
+import com.ljt.study.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyValues;
@@ -23,6 +24,7 @@ public class CustomInstantiationAwareBeanPostProcessor implements InstantiationA
         log.info("{} 实例化之前", beanName);
 
         if (beanClass == Bpp.class) {
+            log.info("此种方式创建bean={}，就不会执行doCreateBean了，会执行postProcessAfterInitialization", beanName);
             Enhancer enhancer = new Enhancer();
             enhancer.setSuperclass(beanClass);
             enhancer.setCallback((MethodInterceptor) (o, method, objects, methodProxy) -> {
@@ -44,13 +46,20 @@ public class CustomInstantiationAwareBeanPostProcessor implements InstantiationA
      */
     @Override
     public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
-        boolean flag = System.currentTimeMillis() % 2 == 0;
-        log.info("{} 实例化之后，是否执行【{}】 postProcessProperties", beanName, flag);
-        return flag;
+        log.info("{} 实例化之后", beanName);
+        if (bean instanceof User) {
+            User user = (User) bean;
+            user.setName("实例化之后通过postProcessAfterInstantiation设置属性值");
+            /*
+             * 返回false之后就不会设置XML的property和下面的postProcessPropertyValues方法
+             */
+            return false;
+        }
+        return true;
     }
 
     /**
-     * 属性处理
+     * 填充属性逻辑中调用
      */
     @Override
     public PropertyValues postProcessProperties(PropertyValues pvs, Object bean, String beanName) throws BeansException {

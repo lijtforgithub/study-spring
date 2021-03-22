@@ -1,4 +1,4 @@
-package com.ljt.study.code.replacemethod;
+package com.ljt.study.code.replace;
 
 import lombok.extern.slf4j.Slf4j;
 

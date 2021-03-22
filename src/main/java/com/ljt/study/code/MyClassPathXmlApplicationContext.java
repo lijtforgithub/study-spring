@@ -16,7 +16,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 @Slf4j
 public class MyClassPathXmlApplicationContext extends ClassPathXmlApplicationContext {
 
-    public MyClassPathXmlApplicationContext(String configLocation) throws BeansException {
+    public MyClassPathXmlApplicationContext(String... configLocation) throws BeansException {
         super(configLocation);
     }
 
@@ -29,6 +29,9 @@ public class MyClassPathXmlApplicationContext extends ClassPathXmlApplicationCon
     @Override
     protected void customizeBeanFactory(DefaultListableBeanFactory beanFactory) {
         log.info("扩展 customizeBeanFactory");
+        /*
+         * 两个xml中含有相同名称的bean
+         */
         super.setAllowBeanDefinitionOverriding(Boolean.TRUE);
         super.setAllowCircularReferences(Boolean.TRUE);
         super.customizeBeanFactory(beanFactory);

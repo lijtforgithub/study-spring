@@ -4,7 +4,8 @@ import com.ljt.study.AbstractTest;
 import com.ljt.study.code.bfpp.supplier.BfppSupplierConfig;
 import com.ljt.study.code.bpp.Bpp;
 import com.ljt.study.code.bpp.instantiation.InstantiationAwareBppConfig;
-import com.ljt.study.code.replacemethod.OriginalHello;
+import com.ljt.study.code.populate.PopulateBean;
+import com.ljt.study.code.replace.OriginalHello;
 import com.ljt.study.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
@@ -84,6 +85,13 @@ public class CodeTest extends AbstractTest {
         setApplicationContext(BfppSupplierConfig.class);
         User bean = applicationContext.getBean(User.class);
         System.out.println(bean.getName());
+    }
+
+    @Test
+    public void testPopulate() {
+        setApplicationContext("populate");
+        PopulateBean bean = applicationContext.getBean(PopulateBean.class);
+        System.out.println(bean);
     }
 
 }
