@@ -17,4 +17,11 @@ public class EventConfig {
         log.info("执行监听事件：{}", event.getSource());
     }
 
+    /*@Bean(APPLICATION_EVENT_MULTICASTER_BEAN_NAME)
+    public ApplicationEventMulticaster multicaster() {
+        SimpleApplicationEventMulticaster multicaster = new SimpleApplicationEventMulticaster();
+        multicaster.setTaskExecutor(Executors.newSingleThreadExecutor());
+        return multicaster;
+    }*/
+
 }
