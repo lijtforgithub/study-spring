@@ -52,7 +52,7 @@ public class SseController {
             sseEmitter.send(content);
         }
 
-        return "over";
+        return "push";
     }
 
     @GetMapping(path = "/over/{id}")
@@ -77,7 +77,7 @@ public class SseController {
             }
         });
 
-        return "over";
+        return "pushAll";
     }
 
 }
