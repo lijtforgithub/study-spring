@@ -54,7 +54,7 @@ public class SseController {
             sseEmitter.send(content);
         }
 
-        return "push";
+        return "SseEmitter:push";
     }
 
     @GetMapping(path = "/over/{id}")
@@ -66,7 +66,7 @@ public class SseController {
             SSE_CACHE.remove(id);
         }
 
-        return "over";
+        return "SseEmitter:over";
     }
 
     @GetMapping(path = "/push-all")
@@ -79,7 +79,7 @@ public class SseController {
             }
         });
 
-        return "pushAll";
+        return "SseEmitter:pushAll";
     }
 
 }
