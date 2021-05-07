@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static org.springframework.http.MediaType.TEXT_EVENT_STREAM_VALUE;
+
 /**
  * @author LiJingTang
  * @date 2021-04-27 17:52
@@ -24,7 +26,7 @@ public class SseController {
 
     private static final Map<String, SseEmitter> SSE_CACHE = new ConcurrentHashMap<>();
 
-    @GetMapping(produces = "text/event-stream;charset=utf-8")
+    @GetMapping(produces = TEXT_EVENT_STREAM_VALUE)
     public String index() {
         log.info("来了 老弟 {}", Thread.currentThread().getName());
 
