@@ -3,6 +3,8 @@ package com.ljt.study.tx.service;
 import com.ljt.study.model.Log;
 import com.ljt.study.tx.mapper.TxLogMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +16,12 @@ import java.util.List;
 @Service
 public class TxLogService {
 
+    private static final String SELECT_ALL = "SELECT * FROM log";
+
     @Autowired
     private TxLogMapper logMapper;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     public void save(Log log) {
         logMapper.insert(log);
@@ -27,6 +33,10 @@ public class TxLogService {
 
     public List<Log> findAll() {
         return logMapper.selectList(null);
+    }
+
+    public List<Log> findAllUserJdbc() {
+        return jdbcTemplate.query(SELECT_ALL, new BeanPropertyRowMapper<Log>(Log.class));
     }
 
 }
