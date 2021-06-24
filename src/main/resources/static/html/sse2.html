@@ -12,7 +12,7 @@
 </body>
 </html>
 <script>
-    const source = new EventSource('http://localhost:8080/web/sse/subscribe/user2');
+    const source = new EventSource('http://localhost:8080/sse/subscribe/user2');
     source.onmessage = function (event) {
         let text = document.getElementById('result').innerText;
         text += '\n' + event.data;

@@ -1,17 +1,17 @@
-package com.ljt.study.web;
+package com.ljt.study.tx;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author LiJingTang
- * @date 2021-04-27 17:53
+ * @date 2021-06-23 17:12
  */
 @SpringBootApplication
-public class WebApplication {
+public class TxApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WebApplication.class);
+        SpringApplication.run(TxApplication.class, args);
     }
 
 }

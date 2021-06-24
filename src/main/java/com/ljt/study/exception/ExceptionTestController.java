@@ -9,23 +9,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @date 2020-01-04 20:08
  */
 @Controller("exceptionTestController")
-@RequestMapping("/lijt/spring/exception")
-public class TestController {
+@RequestMapping("/exception")
+public class ExceptionTestController {
 
-    @RequestMapping("/null.htm")
+    @RequestMapping("/null")
     public void testNullPointerException() {
         User user = null;
         // 这里就会发生空指针异常，然后就会返回定义在SpringMVC配置文件中的null视图
         System.out.println(user.getId());
     }
 
-    @RequestMapping("/number.htm")
+    @RequestMapping("/number")
     public void testNumberFormatException() {
         // 这里就会发生NumberFormatException，然后就会返回定义在SpringMVC配置文件中的number视图
         Integer.parseInt("abc");
     }
 
-    @RequestMapping("/default.htm")
+    @RequestMapping("/default")
     public void testDefaultException() {
         // 由于该异常类型在SpringMVC的配置文件中没有指定，所以就会返回默认的exception视图
         throw new RuntimeException("Error!");

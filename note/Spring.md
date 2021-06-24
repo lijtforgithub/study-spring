@@ -23,3 +23,4 @@ This is because in almost all cases when using {@ComponentScan}, default annotat
 8. DisposableBean.destroy
 9. destroyMethod
 #### EmbeddedValueResolverAware
+#### AopContext.currentProxy()

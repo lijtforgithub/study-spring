@@ -5,7 +5,7 @@
     <title>EventSource</title>
 </head>
 <script>
-    const es = new EventSource('/web/sse');
+    const es = new EventSource('/sse');
     es.onmessage = function (event) {
         console.log('sse', event);
         document.getElementById('msg').innerText = event.data;

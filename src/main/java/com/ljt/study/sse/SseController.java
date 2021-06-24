@@ -1,4 +1,4 @@
-package com.ljt.study.web;
+package com.ljt.study.sse;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +21,7 @@ import static org.springframework.http.MediaType.TEXT_EVENT_STREAM_VALUE;
  */
 @Slf4j
 @RestController
-@RequestMapping("/web/sse")
+@RequestMapping("/sse")
 public class SseController {
 
     private static final Map<String, SseEmitter> SSE_CACHE = new ConcurrentHashMap<>();

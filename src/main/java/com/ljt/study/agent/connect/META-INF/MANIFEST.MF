@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Premain-Class: com.ljt.study.agent.connect.PrintReturnValue
+Can-Redefine-Classes: true
+Boot-Class-Path: javassist-3.26.0-GA.jar
