@@ -3,6 +3,8 @@ spring:
     name: study-spring
   main:
     banner-mode: off
+  aop:
+    proxy-target-class: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
