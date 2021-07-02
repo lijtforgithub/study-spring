@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config />
+	
+	<!-- @Resource使用名称属性，默认情况下Spring解释这个值作为要注入的bean的名称。
+	如果没有明确地指定名称，那么默认的名称就从字段名称或setter方法中派生出来。以字段为例，它会选用字段名称；以setter方法为例，它会选用bean的属性名称。
+	在使用@Resource并没有明确指定名称的独占情况下，和@Autowired相似，@Resource发现主要类型匹配。
+	如果设置了@Resource的name，则只按照bean的名称去查找。
+	@Resource如果没有配置name则按照字段属性名查找对应的bean，如果对应多个的话（会报异常）设置primary="true"可以解决 -->
+	<bean id="resourceBean" class="com.ljt.study.ioc.di.annotation.ResourceBean" />
+		
+	<bean id="bean0" class="com.ljt.study.ioc.bean.xml.Bean"/>
+	<bean id="bean1" class="com.ljt.study.ioc.di.annotation.qualifier.PrimaryBean">
+		<constructor-arg name="data" value="bean1" />
+	</bean>
+	<bean id="bean2" class="com.ljt.study.ioc.di.annotation.qualifier.PrimaryBean" primary="true">
+		<constructor-arg name="data" value="bean2" />
+	</bean>
+		
+</beans>

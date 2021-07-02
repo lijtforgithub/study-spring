@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config />
+	<!-- <context:annotation-config /> 隐式注册的后处理器包含AutowiredAnnotationBeanPostProcessor，CommonAnnotationBeanPostProcessor，
+	PersistenceAnnotationBeanPostProcessor，RequiredAnnotationBeanPostProcessor -->
+	
+	<!-- XML配置的autowire="byName"会覆盖注解配置的@Resource(name="annotationPerson")所以此次注入的是person -->
+	<bean id="annotationBean" class="com.ljt.study.ioc.di.annotation.AnnotationBean" autowire="byName">
+		<property name="requiredAnnotation" value="@Required在setter方法上，此属性在bean实例化时必须注入" />
+		<property name="autowiredAnnotation" value="@Autowired的required默认是true即是必须注入的属性，可以设置为false即不必须注入。按照类型匹配，对应多个相同的类型会报异常" />
+		<property name="injectAnnotation" value="@Inject是JSR330的注解，没有必须的属性（必须注入），不像Spring的@Autowired注解那样，如果要注入的值是可选的话，要有一个required属性来表示" /> 
+	</bean>
+	
+	<bean id="person" class="com.ljt.study.ioc.bean.xml.extend.Person">
+		<property name="name" value="XML-BEAN" />
+	</bean>
+	<bean id="annotationPerson" class="com.ljt.study.ioc.bean.xml.extend.Person">
+		<property name="name" value="ANNOTATION-BEAN" />
+	</bean>
+	<bean class="com.ljt.study.ioc.bean.xml.Bean" />
+		
+</beans>

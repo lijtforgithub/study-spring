@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config />
+	
+	<bean id="qualifierBean" class="com.ljt.study.ioc.di.annotation.qualifier.QualifierBean" />
+		
+	<bean class="com.ljt.study.ioc.di.annotation.qualifier.PrimaryBean" primary="true">
+		<constructor-arg name="data" value="加了primary配置firstPrimaryBean" />
+	</bean>
+	<!-- id="secondPrimaryBean"  -->
+	<bean class="com.ljt.study.ioc.di.annotation.qualifier.PrimaryBean">
+		<!-- 用ID限定也可 （用ID+primary配置可覆盖qualifier配置）-->
+		<qualifier value="secondPrimaryBean" />
+		<constructor-arg name="data" value="qualifier配置覆盖了primary配置secondPrimaryBean" />
+	</bean>
+	
+	<!-- 对于后备匹配，bean名称被认为是默认的限定符值。因此你可以使用id为“main”来定义bean，来替代嵌套的限定符元素，这也会达到相同的匹配结果。
+	然而，尽管你使用这种规约来通过名称参照特定的bean，@Autowired从根本上来说就是关于类型驱动注入和可选语义限定符的。这就是说限定符的值，即便有bean的名称作为后备，通常在类型匹配时也会缩小语义；它们不会在语义上表达对唯一bean的id的引用。好的限定符的值是“main”或“EMEA”或“persistent”，特定组件的表达特性是和bean的id独立的 -->
+	
+	
+	
+	<!-- 自定义限定注解GenreQualifier -->
+	<bean class="com.ljt.study.ioc.di.annotation.qualifier.PrimaryBean">
+		<!-- 然后指定type和value值来匹配你自定义的限定符注解。这种类型匹配是基于注解类的完全限定名。否则，作为一种简便的形式，如果没有名称冲突存在的风险，你可以使用短类名 -->
+        <qualifier type="com.ljt.study.ioc.di.annotation.meta.GenreQualifier" value="First" />
+        <constructor-arg name="data" value="GenreQualifier:First" />
+    </bean>
+    <bean class="com.ljt.study.ioc.di.annotation.qualifier.PrimaryBean">
+      	<qualifier type="com.ljt.study.ioc.di.annotation.meta.GenreQualifier" value="Second" />
+      	<constructor-arg name="data" value="GenreQualifier:Second" />
+    </bean>
+    <!-- 自定义限定注解OfflineQualifier -->
+    <bean class="com.ljt.study.ioc.di.annotation.qualifier.PrimaryBean">
+      	<qualifier type="com.ljt.study.ioc.di.annotation.meta.OfflineQualifier" />
+      	<constructor-arg name="data" value="OfflineQualifier" />
+    </bean>
+	
+	<bean id="customBean" class="com.ljt.study.ioc.di.annotation.qualifier.CustomQualifierBean" />
+	
+	<import resource="qualifier-movie.xml" />
+	
+	
+	
+	
+	<!-- 自定义限定器注解类型 -->
+	<bean id="customAutowireConfigurer" class="org.springframework.beans.factory.annotation.CustomAutowireConfigurer">
+	    <property name="customQualifierTypes">
+	        <set>
+	            <value>com.ljt.study.ioc.di.annotation.meta.CustomQualifier</value>
+	        </set>
+	    </property>
+	</bean>
+		
+</beans>

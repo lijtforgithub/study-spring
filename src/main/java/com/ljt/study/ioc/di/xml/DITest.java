@@ -8,22 +8,22 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
  * @author LiJingTang
  * @date 2020-01-04 11:32
  */
-public class XmlDITest extends AbstractTest {
+class DITest extends AbstractTest {
 
     @Test
-    public void testConstructor() {
+    void constructor() {
         setApplicationContext("constructor");
     }
 
     @Test
-    public void testSetter() {
+    void setter() {
         setApplicationContext("setter");
 
         System.out.println("测试两种依赖注入方法一起使用属性的值：" + (applicationContext.getBean("diBeanId", SetterBean.class).getExplain()));
     }
 
     @Test
-    public void testCollection() {
+    void collection() {
         setApplicationContext("collection");
 
         // 集合注入
@@ -39,7 +39,7 @@ public class XmlDITest extends AbstractTest {
     }
 
     @Test
-    public void testNameSpace() {
+    void namespace() {
         setApplicationContext("namespace");
 
         PropertyPlaceholderConfigurer dbConfig = applicationContext.getBean("dbProperties", PropertyPlaceholderConfigurer.class);
@@ -47,7 +47,7 @@ public class XmlDITest extends AbstractTest {
     }
 
     @Test
-    public void testAutowire() {
+    void autowire() {
         setApplicationContext("autowire");
 
         // byName

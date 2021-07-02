@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- bean的定义应该包含匹配的限定符值。这个示例也展示了bean的元属性可能用于替代<qualifier/>子元素。
+	如果可用，<qualifier/>和它的属性优先，但是如果目前没有限定符，自动装配机制就会在<meta/>标签提供的值上失效，就像下面这个示例中的最后两个bean。
+	
+	我们可以使用 <meta> 标签来代替 <qualifier/>标签，如果 <meta> 标签和 <qualifier/> 标签同时出现，那么优先使用<qualifier> 标签。
+	如果没有 <qualifier> 标签，那么会用 <meta>提供的键值对来封装 <qualifier> 标签 -->
+	<bean class="com.ljt.study.ioc.di.annotation.qualifier.MovieCatalog">
+        <qualifier type="com.ljt.study.ioc.di.annotation.meta.MovieQualifier">
+            <attribute key="format" value="VHS" />
+            <attribute key="genre" value="Action" />
+        </qualifier>
+        <property name="format" value="VHS" />
+        <property name="genre" value="Action" />
+    </bean>
+
+    <bean class="com.ljt.study.ioc.di.annotation.qualifier.MovieCatalog">
+        <qualifier type="com.ljt.study.ioc.di.annotation.meta.MovieQualifier">
+            <attribute key="format" value="VHS" />
+            <attribute key="genre" value="Comedy" />
+        </qualifier>
+        <property name="format" value="VHS" />
+        <property name="genre" value="Comedy" />
+    </bean>
+
+    <bean class="com.ljt.study.ioc.di.annotation.qualifier.MovieCatalog">
+        <meta key="format" value="DVD" />
+        <meta key="genre" value="Action" />
+        <property name="format" value="DVD" />
+        <property name="genre" value="Action" />
+    </bean>
+
+    <bean class="com.ljt.study.ioc.di.annotation.qualifier.MovieCatalog">
+        <meta key="format" value="BLURAY" />
+        <meta key="genre" value="Comedy" />
+        <property name="format" value="BLURAY" />
+        <property name="genre" value="Comedy" />
+    </bean>
+		
+	<bean id="movieRecommender" class="com.ljt.study.ioc.di.annotation.qualifier.MovieRecommender" />
+		
+</beans>

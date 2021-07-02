@@ -134,3 +134,19 @@ Spring以相同名称来查找需要被自动装配的bean。比如，如果bean
 | @Value |  |  |
 | @Required |  |  |
 | @Lazy |  |  |
+
+#### component-scan
+注解注入会在XML注入之前执行，因此通过两种方式，那么后面的配置会覆盖前面装配的属性。
+
+	@Component，@Service和@Controller。@Component是对Spring任意管理组件的通用刻板。@Repository，@Service和@Controller是对更多的特定用例@Component的专业化。
+	
+	默认情况下，使用@Component，@Repository，@Service，@Controller注解或使用了进行自定义的@Component注解的类本身仅仅检测候选组件。
+	你可以修改并扩展这种行为，仅仅应用自定义的过滤器就可以了。在component-scan元素中添加include-filter或exclude-filter子元素就可以了。
+	每个过滤器元素需要type和expression属性。下面的表格描述了过滤选项。
+	annotation（注解）	org.example.SomeAnnotation 		在目标组件的类型层表示的注解
+	assignable（分配）	org.example.SomeClass			目标组件分配去（扩展/实现）的类（接口）
+	aspectj 			org.example..*Service+ 			AspectJ类型表达式来匹配目标组件
+	regex（正则表达式）	org\.example\.Default.*			正则表达式来匹配目标组件类的名称
+	custom（自定义）		org.example.MyTypeFilter		自定义org.springframework.co
+
+	一般情况下，Spring管理的组件，自动检测组件的默认和最多使用的范围是单例范围。

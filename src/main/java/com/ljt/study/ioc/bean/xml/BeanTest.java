@@ -11,10 +11,10 @@ import org.springframework.context.support.AbstractApplicationContext;
  * @author LiJingTang
  * @date 2020-01-04 10:43
  */
-public class XMLBeanTest extends AbstractTest {
+class BeanTest extends AbstractTest {
 
     @Test
-    public void testBeans() {
+    void beans() {
         setApplicationContext("beans");
         printBeanDefinition();
 
@@ -25,7 +25,7 @@ public class XMLBeanTest extends AbstractTest {
     }
 
     @Test
-    public void testBeanAttr() {
+    void beanAttr() {
         setApplicationContext("bean-attr");
 
         // null和空字符串
@@ -38,12 +38,12 @@ public class XMLBeanTest extends AbstractTest {
     }
 
     @Test
-    public void testDependsOn() {
+    void dependsOn() {
         setApplicationContext("depends-on");
     }
 
     @Test
-    public void testLazy() {
+    void lazy() {
         setApplicationContext("lazy");
 
         applicationContext.getBean("notSingleton", LazyBean.class);
@@ -51,7 +51,7 @@ public class XMLBeanTest extends AbstractTest {
     }
 
     @Test
-    public void testScope() {
+    void scope() {
         setApplicationContext("scope");
 
         // 默认
@@ -75,7 +75,7 @@ public class XMLBeanTest extends AbstractTest {
     }
 
     @Test
-    public void testExtends() {
+    void extend() {
         setApplicationContext("extends");
 
         Chinese chinese = applicationContext.getBean("chinese", Chinese.class);
