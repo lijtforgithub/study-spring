@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+        
+	<bean id="userService" class="com.ljt.transaction.service.impl.UserServiceImpl" />
+	<!-- <bean id="userService" class="com.ljt.transaction.service.impl.DefaultUserService">
+		<property name="dataSource" ref="dataSource" />
+	</bean> -->
+
+	<!-- transaction-manager属性被设置为一个指向 PlatformTransactionManager bean的名字(这里指 txManager)， 该bean将会真正管理事务。
+		如果 PlatformTransactionManager bean的名字是 transactionManager的话，事务通知（<tx:advice/>）中的 transaction-manager属性可以忽略 -->
+  	<tx:advice id="txAdvice" transaction-manager="txManager">
+  		<tx:attributes>
+  			<!-- 所有以 get开头的方法看做执行在只读事务上下文中， 其余的方法执行在默认语义的事务上下文中。  -->
+			<tx:method name="get*" read-only="true" rollback-for="NoProductInStockException" />
+			<tx:method name="*" rollback-for="Throwable" no-rollback-for="InstrumentNotFoundException" />
+	  	</tx:attributes>
+  	</tx:advice>
+  
+  	<aop:config>
+  		<aop:pointcut id="userServicePointcut" expression="execution(* com.ljt.transaction.service.*.*(..))" />
+  		<aop:advisor advice-ref="txAdvice" pointcut-ref="userServicePointcut" />
+  	</aop:config>
+    
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	  	<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<import resource="classpath:application.xml" />
+	
+</beans>

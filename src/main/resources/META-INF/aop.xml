@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE aspectj PUBLIC "-//AspectJ//DTD//EN" "http://www.eclipse.org/aspectj/dtd/aspectj.dtd">
+<aspectj>
+
+	<weaver>
+		<!-- <include within="com.ljt.aop.aspectj.DomainBean" /> -->
+		<!-- <include within="com.ljt.aop..*" /> -->
+		<!-- 测试自我调用被事务覆盖到 -->
+		<include within="com.ljt.transaction.service.impl.DefaultUserService" />
+	</weaver>
+
+	<!-- <aspects>
+	    <aspect name="com.ljt.aop.aspectj.ProfilingAspect" />
+    </aspects> -->
+    
+</aspectj>

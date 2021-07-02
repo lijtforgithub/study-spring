@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+    <import resource="jms.xml" />
+    
+    <bean id="sessionAwareQueue" class="org.apache.activemq.command.ActiveMQQueue">  
+        <constructor-arg value="destination.queue.session" />  
+    </bean>
+    
+    <bean id="consumerSessionAwareMessageListener" class="com.ljt.jms.listener.ConsumerSessionAwareMessageListener">  
+        <property name="destination" ref="queue" />  
+    </bean> 
+    
+    <bean id="sessionAwareListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">  
+        <property name="connectionFactory" ref="connectionFactory" />  
+        <property name="destination" ref="sessionAwareQueue" />  
+        <property name="messageListener" ref="consumerSessionAwareMessageListener" />  
+    </bean>
+    
+    <bean id="queue" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg value="destination.queue" />
+    </bean>
+        
+</beans>

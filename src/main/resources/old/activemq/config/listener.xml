@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+    <import resource="jms.xml" />
+        
+	<!-- 点对点-->
+    <bean id="queue" class="org.apache.activemq.command.ActiveMQQueue">
+    	<!-- 设置队列的名字 -->
+        <constructor-arg value="destination.queue" />
+    </bean>
+    
+     <!-- 发布/订阅-->
+    <bean id="topic" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg value="destination.topic" />
+    </bean>
+
+    <!-- 消息侦听器 -->
+    <bean id="messageListener" class="com.ljt.jms.listener.ConsumerMessageListener" />
+    
+    <!-- 消息侦听容器 -->
+    
+    <!-- 只能接收一次 -->
+    <bean id="queueContainer1" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="destination" ref="queue" />
+        <property name="messageListener" ref="messageListener" />
+    </bean>
+    <bean id="queueContainer2" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="destination" ref="queue" />
+        <property name="messageListener" ref="messageListener" />
+    </bean>
+    
+    <!-- 接收了两次 -->
+    <bean id="topicContainer1" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="destination" ref="topic" />
+        <property name="messageListener" ref="messageListener" />
+    </bean>
+    <bean id="topicContainer2" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="destination" ref="topic" />
+        <property name="messageListener" ref="messageListener" />
+    </bean>
+	
+</beans>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:jee="http://www.springframework.org/schema/jee"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/jee
+        http://www.springframework.org/schema/jee/spring-jee.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+        
+    <import resource="jms.xml" />
+        
+    <bean id="queue" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg value="destination.queue" />
+    </bean>
+    
+    <bean id="messageListener" class="com.ljt.jms.listener.ConsumerMessageListener" autowire="byType" />
+    
+    <!-- 当在接收消息时监听器执行失败时JMS就会对接收到的消息进行回滚，对于SessionAwareMessageListener在接收到消息后发送一个返回消息时也处于同一事务下，
+    	但是对于其他操作如数据库访问等将不属于该事务控制。 -->
+    <!--  如果想接收消息和数据库访问处于同一事务中，那么我们就可以配置一个外部的事务管理同时配置一个支持外部事务管理的消息监听容器（如DefaultMessageListenerContainer）。
+    	要配置这样一个参与分布式事务管理的消息监听容器，我们可以配置一个JtaTransactionManager，当然底层的JMS ConnectionFactory需要能够支持分布式事务管理，
+    	并正确地注册我们的JtaTransactionManager。这样消息监听器进行消息接收和对应的数据库访问就会处于同一数据库控制下，当消息接收失败或数据库访问失败都会进行事务回滚操作。 -->
+    <!-- 当给消息监听容器指定了transactionManager时，消息监听容器将忽略sessionTransacted的值。 -->
+    <bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="destination" ref="queue" />
+        <property name="messageListener" ref="messageListener" />
+        <property name="sessionTransacted" value="true" /> <!-- 默认为false -->
+        <property name="transactionManager" ref="jtaTransactionManager" />  
+    </bean>
+    
+    <!-- 用JavaEE应用服务器才能支持JTA 虽然数据没有保存到数据库 但是默认放到DLQ-死信队列(Dead Letter Queue)用来保存处理失败或者过期的消息。缺省的死信队列是ActiveMQ.DLQ-->
+	<jee:jndi-lookup jndi-name="jdbc/TEST" id="dataSource" />
+	<bean id="jtaTransactionManager" class="org.springframework.transaction.jta.JtaTransactionManager" />
+	<tx:annotation-driven transaction-manager="jtaTransactionManager" /> 
+	
+	<bean id="dbService" class="com.ljt.jms.service.impl.DBServiceImpl" autowire="byType" />
+	
+</beans>

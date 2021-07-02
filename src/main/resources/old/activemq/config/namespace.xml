@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:jms="http://www.springframework.org/schema/jms"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/jms 
+        http://www.springframework.org/schema/jms/spring-jms.xsd">
+        
+    <jms:listener-container connection-factory="myConnectionFactory"
+        task-executor="myTaskExecutor"
+        destination-resolver="myDestinationResolver"
+        transaction-manager="myTransactionManager"
+        concurrency="10">
+        
+    	<jms:listener destination="queue.orders" ref="orderService" method="placeOrder" />
+    	<jms:listener destination="queue.confirmations" ref="confirmationLogger" method="log" />
+	</jms:listener-container>
+	
+	<jms:jca-listener-container resource-adapter="myResourceAdapter"
+    	destination-resolver="myDestinationResolver"
+        transaction-manager="myTransactionManager"
+        concurrency="10">
+
+	    <jms:listener destination="queue.orders" ref="myMessageListener" />
+	</jms:jca-listener-container>
+	
+</beans>

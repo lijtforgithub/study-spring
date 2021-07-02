@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:jee="http://www.springframework.org/schema/jee"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/jee
+        http://www.springframework.org/schema/jee/spring-jee.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<jee:jndi-lookup id="dataSource1" jndi-name="jdbc/TEST" />
+	<jee:jndi-lookup id="dataSource2" jndi-name="jdbc/TEST_JTA" />
+	<!-- 任何资源的JTA配置都是这样的，因为它们都是全局事务，可以支持任何事务性资源。 -->
+	<bean id="txManager" class="org.springframework.transaction.jta.JtaTransactionManager" />
+	
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+  		<tx:attributes>
+			<tx:method name="save*" rollback-for="Throwable" />
+	  	</tx:attributes>
+  	</tx:advice>
+  
+  	<aop:config>
+  		<aop:pointcut id="jtaServicePointcut" expression="execution(* com.ljt.transaction.service.*.*(..))" />
+  		<aop:advisor advice-ref="txAdvice" pointcut-ref="jtaServicePointcut" />
+  	</aop:config>
+	
+	<!-- 在标准的场景中，包括 WebLogic、WebSphere和OC4J，请考虑简单的使用'<tx:jta-transaction-manager/>'配置元素。
+		 它会自动检测底层所使用的服务器以此来选择最合适的事务管理器。 -->
+	<!-- <tx:jta-transaction-manager /> -->
+	
+	<bean class="com.ljt.transaction.service.impl.JTAServiceImpl">
+		<property name="JdbcTemplate1">
+			<bean class="org.springframework.jdbc.core.JdbcTemplate">
+				<constructor-arg ref="dataSource1" />
+			</bean>
+		</property>
+		<property name="JdbcTemplate2">
+			<bean class="org.springframework.jdbc.core.JdbcTemplate">
+				<constructor-arg ref="dataSource2" />
+			</bean>
+		</property>
+	</bean>
+	
+</beans>

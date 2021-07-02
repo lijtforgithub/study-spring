@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+    <import resource="jms.xml" />
+    
+    <bean id="adapterQueue" class="org.apache.activemq.command.ActiveMQQueue">  
+        <constructor-arg value="destination.queue.adapter" />  
+    </bean>
+    <!-- 用于测试消息回复的 -->
+    <bean id="responseQueue" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg value="destination.queue.adapter.response" />
+    </bean>
+    <bean id="defaultResponseQueue" class="org.apache.activemq.command.ActiveMQQueue">  
+	    <constructor-arg value="destination.queue.adapter.response.default" />  
+	</bean>
+    
+    <!-- <bean id="messageListenerAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+        <constructor-arg>
+        	<bean class="com.ljt.jms.listener.ConsumerListener" />
+        </constructor-arg>
+    </bean> -->
+    
+    <!-- 通过MessageListenerAdapter的defaultListenerMethod属性来决定的，当我们没有指定该属性时，Spring会默认调用目标处理器的handleMessage方法 -->
+    <bean id="messageListenerAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">  
+	    <property name="delegate">
+	    	<bean class="com.ljt.jms.listener.ConsumerListener" />
+	    </property> 
+	    <property name="defaultListenerMethod" value="receiveMessage" />
+	    
+	    <!-- 当两种方式都指定了消息的回复目的地的时候使用发送消息的setJMSReplyTo方法指定的目的地将具有较高的优先级，
+	    	MessageListenerAdapter将只往该方法指定的消息回复目的地发送回复消息。 -->
+	    <property name="defaultResponseDestination" ref="defaultResponseQueue" />
+	</bean>
+    
+    <!-- 消息侦听适配器对应的侦听容器 -->
+    <bean id="messageListenerAdapterContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="destination" ref="adapterQueue" />
+        <property name="messageListener" ref="messageListenerAdapter" /><!-- 使用MessageListenerAdapter来作为消息监听器 -->
+    </bean>
+    
+    <!-- 自动返回消息的侦听容器 -->
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="destination" ref="responseQueue" />
+        <!-- <property name="destination" ref="defaultResponseQueue" /> -->
+        <property name="messageListener">
+        	<bean class="com.ljt.jms.listener.ConsumerMessageListener" />
+        </property>
+    </bean>
+        
+</beans>

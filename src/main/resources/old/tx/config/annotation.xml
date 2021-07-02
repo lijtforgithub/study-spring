@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+        
+	<bean id="emailService" class="com.ljt.transaction.service.impl.EmailServiceImpl" />
+	<bean id="userService" class="com.ljt.transaction.service.impl.DefaultUserService">
+		<!-- <property name="jdbcTemplate" ref="jdbcTemplate" /> -->
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean> -->
+    
+    <!-- 如果你用 transactionManager来定义 PlatformTransactionManager bean的名字的话，你就可以忽略 <tx:annotation-driven/> 标签里的 transaction-manager属性。 
+    	如果 PlatformTransactionManager bean你要通过其它名称来注入的话，你必须用 transaction-manager属性来指定它 -->
+    <tx:annotation-driven transaction-manager="txManager" mode="aspectj" />
+    
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	  	<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<context:load-time-weaver />
+	<import resource="classpath:application.xml" />
+	
+</beans>

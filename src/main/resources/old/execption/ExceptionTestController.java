@@ -1,4 +1,4 @@
-package com.ljt.study.exception;
+package old.execption;
 
 import com.ljt.study.entity.User;
 import org.springframework.stereotype.Controller;
