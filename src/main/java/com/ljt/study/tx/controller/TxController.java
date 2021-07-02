@@ -1,6 +1,6 @@
 package com.ljt.study.tx.controller;
 
-import com.ljt.study.model.Log;
+import com.ljt.study.entity.Log;
 import com.ljt.study.tx.service.TxLogService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;

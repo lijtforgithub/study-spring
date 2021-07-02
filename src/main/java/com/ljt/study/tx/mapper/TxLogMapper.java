@@ -1,7 +1,7 @@
 package com.ljt.study.tx.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ljt.study.model.Log;
+import com.ljt.study.entity.Log;
 
 /**
  * @author LiJingTang

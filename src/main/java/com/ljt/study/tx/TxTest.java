@@ -1,6 +1,6 @@
 package com.ljt.study.tx;
 
-import com.ljt.study.model.Log;
+import com.ljt.study.entity.Log;
 import com.ljt.study.tx.service.TxLogService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

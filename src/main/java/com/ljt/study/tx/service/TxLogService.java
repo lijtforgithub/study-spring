@@ -1,6 +1,6 @@
 package com.ljt.study.tx.service;
 
-import com.ljt.study.model.Log;
+import com.ljt.study.entity.Log;
 import com.ljt.study.tx.mapper.TxLogMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
