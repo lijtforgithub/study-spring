@@ -9,10 +9,12 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.AbstractApplicationContext;
 
 /**
+ * 依赖注入
+ *
  * @author LiJingTang
  * @date 2021-07-02 16:01
  */
-class DITest extends AbstractTest {
+class DiTest extends AbstractTest {
 
     @Test
     void beans() {

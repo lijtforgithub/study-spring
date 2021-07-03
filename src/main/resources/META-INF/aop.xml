@@ -6,7 +6,7 @@
 		<!-- <include within="com.ljt.aop.aspectj.DomainBean" /> -->
 		<!-- <include within="com.ljt.aop..*" /> -->
 		<!-- 测试自我调用被事务覆盖到 -->
-		<include within="com.ljt.transaction.service.impl.DefaultUserService" />
+<!--		<include within="com.ljt.transaction.service.impl.DefaultUserService" />-->
 	</weaver>
 
 	<!-- <aspects>

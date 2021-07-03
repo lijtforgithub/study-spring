@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+<!--	<bean id="aspect" class="org.springframework.beans.factory.aspectj.AnnotationBeanConfigurerAspect" factory-method="aspectOf" />-->
+	<context:spring-configured />
+
+	<bean id="domain" class="com.ljt.study.aop.aspectj.ConfigurableBean" scope="prototype">
+		<!-- 在@Configurable中设置 autowire=Autowire.BY_TYPE 就不用用下面的注入方法了-->
+	</bean>
+
+	<bean id="goodsService" class="com.ljt.study.aop.service.GoodsService" />
+    
+    <!-- weaver-class="org.springframework.instrument.classloading.ReflectiveLoadTimeWeaver" -->
+    <!--  aspectj-weaving属性值 on(AspectJ织入功能开启，切面将会在加载时适当时机被织入。)off(LTW功能关闭...不会在加载时织入切面。) 
+	autodetect (如果Spring LTW基础设施能找到至少一个META-INF/aop.xml 文件，那么AspectJ织入将会开启，否则关闭。此为默认值。)  -->
+    <context:load-time-weaver />
+    
+</beans>

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
  * @author LiJingTang
  * @date 2020-01-04 11:32
  */
-class DITest extends AbstractTest {
+class DiTest extends AbstractTest {
 
     @Test
     void constructor() {
