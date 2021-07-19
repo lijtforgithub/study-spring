@@ -1,4 +1,4 @@
-package com.ljt.study.inteceptor;
+package com.ljt.study.pp.inteceptor;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

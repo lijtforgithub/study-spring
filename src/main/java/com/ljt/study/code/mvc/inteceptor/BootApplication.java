@@ -1,4 +1,4 @@
-package com.ljt.study.inteceptor;
+package com.ljt.study.pp.inteceptor;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
