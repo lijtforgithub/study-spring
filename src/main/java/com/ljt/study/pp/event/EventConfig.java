@@ -21,6 +21,7 @@ public class EventConfig {
     public ApplicationEventMulticaster multicaster() {
         SimpleApplicationEventMulticaster multicaster = new SimpleApplicationEventMulticaster();
         multicaster.setTaskExecutor(Executors.newSingleThreadExecutor());
+        multicaster.setErrorHandler(Throwable::printStackTrace);
         return multicaster;
     }*/
 

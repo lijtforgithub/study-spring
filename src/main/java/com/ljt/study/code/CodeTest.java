@@ -7,9 +7,14 @@ import com.ljt.study.code.bpp.instantiation.InstantiationAwareBppConfig;
 import com.ljt.study.code.populate.PopulateBean;
 import com.ljt.study.code.replace.OriginalHello;
 import com.ljt.study.entity.User;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.PropertyAccessorFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.convert.ConversionService;
+
+import java.util.Objects;
 
 /**
  * ComponentScanBeanDefinitionParser
@@ -19,47 +24,48 @@ import org.springframework.core.convert.ConversionService;
  * @author LiJingTang
  * @date 2021-03-12 09:50
  */
-public class CodeTest extends AbstractTest {
+@Slf4j
+class CodeTest extends AbstractTest {
 
     @Test
-    public void testContext() {
+    void testContext() {
         System.setProperty("ctx", "context");
         ApplicationContext context = new MyClassPathXmlApplicationContext("classpath:code/application-${ctx}.xml");
-        System.out.println(context);
+        log.info(context.toString());
     }
 
     @Test
-    public void testBfpp() {
+    void testBfpp() {
         new MyClassPathXmlApplicationContext("classpath:code/bfpp.xml");
     }
 
     @Test
-    public void testTag() {
+    void testTag() {
         setApplicationContext("tag");
-        System.out.println(applicationContext.getBean(User.class));
+        log.info(applicationContext.getBean(User.class).toString());
     }
 
     @Test
-    public void testEditor() {
+    void testEditor() {
         setApplicationContext("editor");
-        System.out.println(applicationContext.getBean(User.class));
+        log.info(applicationContext.getBean(User.class).toString());
     }
 
     @Test
-    public void testAware() {
+    void testAware() {
         setApplicationContext("aware");
     }
 
     @Test
-    public void testConvert() {
+    void testConvert() {
         setApplicationContext("convert");
         ConversionService conversionService = applicationContext.getBean(ConversionService.class);
         User user = conversionService.convert("1_璟瑜", User.class);
-        System.out.println(user);
+        log.info(Objects.requireNonNull(user).toString());
     }
 
     @Test
-    public void testReplaceMethod() {
+    void testReplaceMethod() {
         setApplicationContext("replace-method");
         OriginalHello hello = applicationContext.getBean(OriginalHello.class);
         hello.sayHello();
@@ -67,38 +73,47 @@ public class CodeTest extends AbstractTest {
     }
 
     @Test
-    public void testBpp() {
+    void testBpp() {
         setApplicationContext("bpp");
         Bpp bean = applicationContext.getBean(Bpp.class);
         bean.doSomething();
     }
 
     @Test
-    public void testInstantiationAwareBpp() {
+    void testInstantiationAwareBpp() {
         setApplicationContext(InstantiationAwareBppConfig.class);
         Bpp bean = applicationContext.getBean(Bpp.class);
         bean.doSomething();
     }
 
     @Test
-    public void testBfppSupplier() {
+    void testBfppSupplier() {
         setApplicationContext(BfppSupplierConfig.class);
         User bean = applicationContext.getBean(User.class);
-        System.out.println(bean.getName());
+        log.info(bean.getName());
     }
 
     @Test
-    public void testPopulate() {
+    void testPopulate() {
         setApplicationContext("populate");
         PopulateBean bean = applicationContext.getBean(PopulateBean.class);
-        System.out.println(bean);
+        log.info(bean.toString());
     }
 
     @Test
-    public void testCycle() {
+    void testCycle() {
         setApplicationContext("cycle");
 //        A bean = applicationContext.getBean(A.class);
-//        System.out.println(bean.getB().getClass());
+//        log.info(bean.getB().getClass());
+    }
+
+
+    @Test
+    void beanWrapper() {
+        User user = new User();
+        BeanWrapper bw = PropertyAccessorFactory.forBeanPropertyAccess(user);
+        bw.setPropertyValue("name", "张三");
+        log.info(user.getName());
     }
 
 }

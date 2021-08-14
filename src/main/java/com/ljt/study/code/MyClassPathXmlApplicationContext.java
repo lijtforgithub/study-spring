@@ -14,7 +14,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @date 2021-03-12 09:45
  */
 @Slf4j
-public class MyClassPathXmlApplicationContext extends ClassPathXmlApplicationContext {
+class MyClassPathXmlApplicationContext extends ClassPathXmlApplicationContext {
 
     public MyClassPathXmlApplicationContext(String... configLocation) throws BeansException {
         super(configLocation);
