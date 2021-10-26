@@ -13,14 +13,15 @@ This is because in almost all cases when using {@ComponentScan}, default annotat
 #### Scope
 懒加载和原型是在getBean的时候实例化对象。容器启动完成不会初始化。
 #### LifeCycle
-1. 构造方法 constructor
-2. BeanPostProcessor.postProcessBeforeInitialization
-3. @PostConstruct
-4. InitializingBean.afterPropertiesSet
-5. initMethod
-6. BeanPostProcessor.postProcessAfterInitialization
-7. @PreDestroy
-8. DisposableBean.destroy
-9. destroyMethod
+1. 实例化
+2. populateBean(@Autowired/prop)
+3. initializeBean
+    1. invokeAwareMethods(BeanNameAware/BeanClassLoaderAware/BeanFactoryAware)
+    2. BeanPostProcessor.postProcessBeforeInitialization(@PostConstruct/ApplicationContextAwareProcessor)
+    3. invokeInitMethods(InitializingBean.afterPropertiesSet/initMethod)
+    4. BeanPostProcessor.postProcessAfterInitialization
+4. @PreDestroy
+5. DisposableBean.destroy
+6. destroyMethod
 #### EmbeddedValueResolverAware
 #### AopContext.currentProxy()
