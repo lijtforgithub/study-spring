@@ -28,36 +28,36 @@ import java.util.Objects;
 class CodeTest extends AbstractTest {
 
     @Test
-    void testContext() {
+    void context() {
         System.setProperty("ctx", "context");
         ApplicationContext context = new MyClassPathXmlApplicationContext("classpath:code/application-${ctx}.xml");
         log.info(context.toString());
     }
 
     @Test
-    void testBfpp() {
+    void bfpp() {
         new MyClassPathXmlApplicationContext("classpath:code/bfpp.xml");
     }
 
     @Test
-    void testTag() {
+    void tag() {
         setApplicationContext("tag");
         log.info(applicationContext.getBean(User.class).toString());
     }
 
     @Test
-    void testEditor() {
+    void editor() {
         setApplicationContext("editor");
         log.info(applicationContext.getBean(User.class).toString());
     }
 
     @Test
-    void testAware() {
+    void aware() {
         setApplicationContext("aware");
     }
 
     @Test
-    void testConvert() {
+    void convert() {
         setApplicationContext("convert");
         ConversionService conversionService = applicationContext.getBean(ConversionService.class);
         User user = conversionService.convert("1_璟瑜", User.class);
@@ -65,7 +65,7 @@ class CodeTest extends AbstractTest {
     }
 
     @Test
-    void testReplaceMethod() {
+    void replaceMethod() {
         setApplicationContext("replace-method");
         OriginalHello hello = applicationContext.getBean(OriginalHello.class);
         hello.sayHello();
@@ -73,35 +73,35 @@ class CodeTest extends AbstractTest {
     }
 
     @Test
-    void testBpp() {
+    void bpp() {
         setApplicationContext("bpp");
         Bpp bean = applicationContext.getBean(Bpp.class);
         bean.doSomething();
     }
 
     @Test
-    void testInstantiationAwareBpp() {
+    void instantiationAwareBpp() {
         setApplicationContext(InstantiationAwareBppConfig.class);
         Bpp bean = applicationContext.getBean(Bpp.class);
         bean.doSomething();
     }
 
     @Test
-    void testBfppSupplier() {
+    void bfppSupplier() {
         setApplicationContext(BfppSupplierConfig.class);
         User bean = applicationContext.getBean(User.class);
         log.info(bean.getName());
     }
 
     @Test
-    void testPopulate() {
+    void populate() {
         setApplicationContext("populate");
         PopulateBean bean = applicationContext.getBean(PopulateBean.class);
         log.info(bean.toString());
     }
 
     @Test
-    void testCycle() {
+    void cycle() {
         setApplicationContext("cycle");
 //        A bean = applicationContext.getBean(A.class);
 //        log.info(bean.getB().getClass());
