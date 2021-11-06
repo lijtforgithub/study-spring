@@ -10,6 +10,6 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  */
 @Configuration
 @EnableAspectJAutoProxy
-@ComponentScan("com.ljt.study.code.proxy")
+@ComponentScan("com.ljt.study.code.proxy.aspect")
 class Config {
 }
