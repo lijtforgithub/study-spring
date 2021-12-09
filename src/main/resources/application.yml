@@ -31,3 +31,6 @@ spring:
       connection-timeout: 30000
       # 用于测试连接的SQL语句
       connection-test-query: SELECT 1
+logging:
+  level:
+    org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: TRACE
