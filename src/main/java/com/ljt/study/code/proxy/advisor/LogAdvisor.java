@@ -28,7 +28,7 @@ class LogAdvisor extends StaticMethodMatcherPointcutAdvisor {
     public boolean matches(Method method, Class<?> targetClass) {
         Method m = method;
 
-        if (isAuthzAnnotationPresent(m)) {
+        if (isAnnotationPresent(m)) {
             return true;
         }
 
@@ -37,7 +37,7 @@ class LogAdvisor extends StaticMethodMatcherPointcutAdvisor {
         if (Objects.nonNull(targetClass)) {
             try {
                 m = targetClass.getMethod(m.getName(), m.getParameterTypes());
-                return isAuthzAnnotationPresent(m) || isAuthzAnnotationPresent(targetClass);
+                return isAnnotationPresent(m) || isAnnotationPresent(targetClass);
             } catch (NoSuchMethodException ignored) {
                 //default return value is false.  If we can't find the method, then obviously
                 //there is no annotation, so just use the default return value.
@@ -47,11 +47,11 @@ class LogAdvisor extends StaticMethodMatcherPointcutAdvisor {
         return false;
     }
 
-    private boolean isAuthzAnnotationPresent(Class<?> targetClazz) {
+    private boolean isAnnotationPresent(Class<?> targetClazz) {
         return Arrays.stream(ANNOTATION_CLASSES).anyMatch(c -> Objects.nonNull(AnnotationUtils.findAnnotation(targetClazz, c)));
     }
 
-    private boolean isAuthzAnnotationPresent(Method method) {
+    private boolean isAnnotationPresent(Method method) {
         return Arrays.stream(ANNOTATION_CLASSES).anyMatch(c -> Objects.nonNull(AnnotationUtils.findAnnotation(method, c)));
     }
 
