@@ -1,4 +1,4 @@
-package com.ljt.study.code.proxy.aspect;
+package com.ljt.study.code.proxy.aspect.bean;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @Component
 class MethodAspect {
 
-    @Pointcut("execution(* com.ljt.study.code.proxy.aspect.*.method*())")
+    @Pointcut("execution(* com.ljt.study.code.proxy.aspect.bean.*.method*())")
     public void method() {}
 
     @SneakyThrows

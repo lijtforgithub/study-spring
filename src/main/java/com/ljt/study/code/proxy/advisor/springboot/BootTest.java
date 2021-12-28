@@ -1,5 +1,6 @@
-package com.ljt.study.code.proxy.advisor;
+package com.ljt.study.code.proxy.advisor.springboot;
 
+import com.ljt.study.code.proxy.advisor.bean.CustomService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ class BootTest {
     @Test
     void test() {
         customService.methodB();
+        log.info("customService = {}", customService.getClass().getName());
     }
 
 }

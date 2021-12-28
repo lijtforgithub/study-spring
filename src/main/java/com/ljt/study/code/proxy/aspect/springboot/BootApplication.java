@@ -1,9 +1,11 @@
-package com.ljt.study.code.proxy.aspect;
+package com.ljt.study.code.proxy.aspect.springboot;
 
+import com.ljt.study.code.proxy.aspect.spring.Config;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Import;
 
 /**
  * springboot默认使用cglib代理
@@ -13,6 +15,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  * @date 2021-06-26 09:14
  */
 @EnableAspectJAutoProxy(exposeProxy = true)
+@Import(Config.class)
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 class BootApplication {
 

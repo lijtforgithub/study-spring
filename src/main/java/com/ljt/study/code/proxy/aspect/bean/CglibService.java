@@ -1,4 +1,4 @@
-package com.ljt.study.code.proxy.aspect;
+package com.ljt.study.code.proxy.aspect.bean;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-class CglibService {
+public class CglibService {
 
     public void methodA() {
         log.info("A");

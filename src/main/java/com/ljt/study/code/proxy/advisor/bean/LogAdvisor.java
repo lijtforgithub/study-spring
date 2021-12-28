@@ -1,8 +1,9 @@
-package com.ljt.study.code.proxy.advisor;
+package com.ljt.study.code.proxy.advisor.bean;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.support.StaticMethodMatcherPointcutAdvisor;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -14,6 +15,7 @@ import java.util.Objects;
  * @date 2021-06-26 09:51
  */
 @Slf4j
+@Component
 class LogAdvisor extends StaticMethodMatcherPointcutAdvisor {
 
     private static final long serialVersionUID = -1210382191888075322L;

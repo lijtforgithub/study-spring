@@ -1,5 +1,7 @@
-package com.ljt.study.code.proxy.aspect;
+package com.ljt.study.code.proxy.aspect.springboot;
 
+import com.ljt.study.code.proxy.aspect.bean.CglibService;
+import com.ljt.study.code.proxy.aspect.bean.JdkService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +22,14 @@ class BootTest {
 
     @Test
     void testJdk() {
-        log.info(jdkService.getClass().getName());
         jdkService.methodB();
+        log.info("jdkService = {}", jdkService.getClass().getName());
     }
 
     @Test
     void testCglib() {
-        log.info(cglibService.getClass().getName());
         cglibService.methodB();
+        log.info("cglibService = {}", cglibService.getClass().getName());
     }
 
 }

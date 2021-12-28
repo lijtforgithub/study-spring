@@ -1,4 +1,4 @@
-package com.ljt.study.code.proxy.advisor;
+package com.ljt.study.code.proxy.advisor.bean;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

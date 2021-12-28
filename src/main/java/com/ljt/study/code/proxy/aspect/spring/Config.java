@@ -1,4 +1,4 @@
-package com.ljt.study.code.proxy.aspect;
+package com.ljt.study.code.proxy.aspect.spring;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +10,6 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  */
 @Configuration
 @EnableAspectJAutoProxy
-@ComponentScan("com.ljt.study.code.proxy.aspect")
-class Config {
+@ComponentScan("com.ljt.study.code.proxy.aspect.bean")
+public class Config {
 }
