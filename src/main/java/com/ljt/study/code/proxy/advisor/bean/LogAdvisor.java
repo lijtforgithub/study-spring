@@ -28,6 +28,7 @@ class LogAdvisor extends StaticMethodMatcherPointcutAdvisor {
 
     @Override
     public boolean matches(Method method, Class<?> targetClass) {
+        log.info("------------ {}, {}, {}", targetClass, isAnnotationPresent(targetClass), isAnnotationPresent(method));
         Method m = method;
 
         if (isAnnotationPresent(m)) {
