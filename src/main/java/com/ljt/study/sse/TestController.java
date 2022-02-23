@@ -4,6 +4,7 @@ import com.lowagie.text.Document;
 import com.lowagie.text.Element;
 import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
+import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfWriter;
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
@@ -28,19 +30,19 @@ import java.util.Objects;
 public class TestController {
 
     @GetMapping("/pdf")
-    public void imageToPdf(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        final String image = "D:\\李敬堂\\离职证明.jpg";
+    public void imageToPdf(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        final String image = "D:\\李敬堂\\test.png";
         final String pdf = "D:\\李敬堂\\ImageToPdf.pdf";
 
         imageToPdf(new FileInputStream(image), response.getOutputStream());
     }
 
-    private void imageToPdf(InputStream imageInput, OutputStream pdfOutput) throws Exception {
+    private static void imageToPdf(InputStream imageInput, OutputStream pdfOutput) throws IOException {
         Objects.requireNonNull(imageInput, "imageInput");
         Objects.requireNonNull(pdfOutput, "pdfOutput");
 
         Document document = new Document();
-        PdfWriter.getInstance(document, pdfOutput);
+        PdfWriter writer = PdfWriter.getInstance(document, pdfOutput);
         document.open();
 
         byte[] bytes = IOUtils.toByteArray(imageInput);
@@ -49,10 +51,25 @@ public class TestController {
 
         float f = Math.min(1, PageSize.A4.getWidth() / image.getWidth());
         f = BigDecimal.valueOf(f).setScale(2, RoundingMode.DOWN).floatValue();
+        image.scalePercent(f * 100);
 
-        image.scalePercent(f * 95);
+        float width = image.getScaledWidth();
+        float height = image.getScaledHeight();
+        int pageNum = Math.round(height / PageSize.A4.getHeight());
 
-        document.add(image);
+        if (pageNum > 1) {
+            PdfContentByte canvas = writer.getDirectContentUnder();
+
+            for (int i = 1; i <= pageNum; i++) {
+                float h = -(PageSize.A4.getHeight() * (pageNum - i));
+                document.newPage();
+                canvas.addImage(image, width, 0, 0, height, 0, h - i);
+            }
+        } else {
+            document.newPage();
+            document.add(image);
+        }
+
         document.close();
     }
 
