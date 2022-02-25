@@ -7,9 +7,7 @@ import com.lowagie.text.PageSize;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfWriter;
 import org.apache.commons.io.IOUtils;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,9 +23,30 @@ import java.util.Objects;
  * @author jtli3
  * @date 2022-01-26 13:57
  */
-@Controller
+@RestController
 @RequestMapping("/test")
 public class TestController {
+
+    @GetMapping("/get")
+    public String get(String key) {
+       return GetMapping.class.getSimpleName();
+    }
+
+    @PostMapping("/post")
+    public String post() {
+        return PostMapping.class.getSimpleName();
+    }
+
+    @PutMapping("/put")
+    public String put() {
+        return PutMapping.class.getSimpleName();
+    }
+
+    @RequestMapping("/req")
+    public String req() {
+        return RequestMapping.class.getSimpleName();
+    }
+
 
     @GetMapping("/pdf")
     public void imageToPdf(HttpServletRequest request, HttpServletResponse response) throws IOException {

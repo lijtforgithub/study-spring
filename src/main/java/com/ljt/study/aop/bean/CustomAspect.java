@@ -97,7 +97,7 @@ public class CustomAspect {
 		System.out.println("	" + this.getClass().getName() + "...before_order()...");
 	}
 
-	@After("order())")
+	@After("order()")
 	public void after_order() {
 		System.out.println("	" + this.getClass().getName() + "...before_order()...");
 	}
