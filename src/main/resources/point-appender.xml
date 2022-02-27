@@ -1,0 +1,24 @@
+<included>
+
+    <property name="POINT_LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%thread] logType:%X{_pol_log_type} businessType:%X{_pol_business_type} clientIp:%X{_pol_client_ip} - %msg%n"/>
+
+    <appender name="POINT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${POINT_LOG_PATTERN}</pattern>
+        </encoder>
+        <file>${LOG_PATH}/point.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/point/point.log_%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <maxHistory>${MAX_HISTORY}</maxHistory>
+            <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+            <totalSizeCap>${TOTAL_SIZE_CAP}</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <logger name="ima.log.point" additivity="false">
+        <appender-ref ref="POINT"/>
+    </logger>
+
+
+</included>

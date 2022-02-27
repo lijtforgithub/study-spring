@@ -1,5 +1,6 @@
 package com.ljt.study.sse;
 
+import com.ljt.study.entity.Log;
 import com.lowagie.text.Document;
 import com.lowagie.text.Element;
 import com.lowagie.text.Image;
@@ -8,6 +9,7 @@ import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfWriter;
 import org.apache.commons.io.IOUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,13 +29,16 @@ import java.util.Objects;
 @RequestMapping("/test")
 public class TestController {
 
-    @GetMapping("/get")
-    public String get(String key) {
-       return GetMapping.class.getSimpleName();
+    @GetMapping("/get/{key}")
+    public String get(@PathVariable String key, String param, Log log) {
+
+        PointLogger.info(BusinessTypeEnm.TEST, BusinessTypeEnm.TEST.getDesc());
+
+        return GetMapping.class.getSimpleName();
     }
 
     @PostMapping("/post")
-    public String post() {
+    public String post(@RequestBody Log log) {
         return PostMapping.class.getSimpleName();
     }
 
@@ -43,7 +48,7 @@ public class TestController {
     }
 
     @RequestMapping("/req")
-    public String req() {
+    public String req(MultipartFile file) {
         return RequestMapping.class.getSimpleName();
     }
 

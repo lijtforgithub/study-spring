@@ -14,7 +14,8 @@ public enum BusinessTypeEnm {
     /**
      * 埋点日志业务类型
      */
-    COMMON("1000", "通用日志埋点");
+    COMMON("1000", "通用日志埋点"),
+    TEST("2000", "测试业务日志埋点");
 
 
     private final String code;

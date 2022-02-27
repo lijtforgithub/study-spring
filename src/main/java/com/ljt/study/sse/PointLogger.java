@@ -1,7 +1,10 @@
 package com.ljt.study.sse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Objects;
 
 /**
  * @author jtli3
@@ -13,20 +16,21 @@ public class PointLogger {
 
     private PointLogger() {}
 
-    public static void debug(String format, Object... arguments) {
-        LOG.debug(format, arguments);
-    }
-
     public static void info(String format, Object... arguments) {
         LOG.info(format, arguments);
     }
 
-    public static void warn(String format, Object... arguments) {
-        LOG.warn(format, arguments);
-    }
+    public static void info(BusinessTypeEnm typeEnm, String format, Object... arguments) {
+        if (Objects.nonNull(typeEnm)) {
+            String origin = MdcHelper.getBusinessType();
+            MdcHelper.setBusinessType(typeEnm.getCode());
 
-    public static void error(String format, Object... arguments) {
-        LOG.error(format, arguments);
+            info(format, arguments);
+
+            MdcHelper.setBusinessType(StringUtils.trimToEmpty(origin));
+        } else {
+            info(format, arguments);
+        }
     }
 
 }
