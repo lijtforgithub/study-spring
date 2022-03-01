@@ -1,0 +1,70 @@
+<included>
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+
+    <springProperty scope="context" name="maxHistory" source="logging.logback.rollingpolicy.max-history"/>
+    <springProperty scope="context" name="maxFileSize" source="logging.logback.rollingpolicy.max-file-size"/>
+    <springProperty scope="context" name="totalSizeCap" source="logging.logback.rollingpolicy.total-size-cap"/>
+
+    <springProperty scope="context" name="applicationName" source="spring.application.name"/>
+
+
+    <property name="MAX_HISTORY" value="${maxHistory:-30}"/>
+    <property name="MAX_FILE_SIZE" value="${maxFileSize:-30MB}"/>
+    <property name="TOTAL_SIZE_CAP" value="${totalSizeCap:-50GB}"/>
+
+    <property name="APP_NAME" value="${SPRING_APPLICATION_NAME:-${applicationName:-app}}"/>
+    <property name="LOG_PATH" value="${LOG_PATH:-/logs/${APP_NAME}/}"/>
+
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p ${PID:- } %tid app_id:${APP_NAME} --- [%t] %logger{30} : %m%n"/>
+
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/all.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/all/all.log_%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <maxHistory>${MAX_HISTORY}</maxHistory>
+            <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+            <totalSizeCap>${TOTAL_SIZE_CAP}</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+                <pattern>${LOG_PATTERN}</pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <appender name="ERROR-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/error/error.log_%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <maxHistory>${MAX_HISTORY}</maxHistory>
+            <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+            <totalSizeCap>${TOTAL_SIZE_CAP}</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!--日志平台-->
+    <appender name="FLY-LOG" class="com.iflytek.fsp.flylog.sdk.java.plugin.logback.FlylogAppender" />
+
+
+    <root level="INFO">
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="ERROR-FILE"/>
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FLY-LOG"/>
+    </root>
+
+    <include resource="point-appender.xml"/>
+
+</included>

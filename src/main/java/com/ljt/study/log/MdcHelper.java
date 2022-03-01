@@ -1,4 +1,4 @@
-package com.ljt.study.sse;
+package com.ljt.study.log;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -31,9 +31,7 @@ class MdcHelper {
     private static final String REQ_URL = PREFIX + "req_url";
     private static final String REQ_METHOD = PREFIX + "req_method";
     private static final String REQ_USER_AGENT = PREFIX + "req_user_agent";
-    private static final String REQ_INPUT = PREFIX + "req_input";
-    private static final String REQ_OUTPUT = PREFIX + "req_output";
-    
+
     static void putPointLog(PointLog pointLog) {
         if (Objects.nonNull(pointLog)) {
             MDC.put(LOG_TYPE, String.valueOf(ObjectUtils.defaultIfNull(pointLog.getLogType(), LogConstant.LOG_TYPE)));
@@ -50,9 +48,6 @@ class MdcHelper {
             MDC.put(REQ_URL, StringUtils.trimToEmpty(pointLog.getReqUrl()));
             MDC.put(REQ_METHOD, StringUtils.trimToEmpty(pointLog.getReqMethod()));
             MDC.put(REQ_USER_AGENT, StringUtils.trimToEmpty(pointLog.getReqUserAgent()));
-            MDC.put(REQ_INPUT, StringUtils.trimToEmpty(pointLog.getReqInput()));
-
-            MDC.put(REQ_OUTPUT, StringUtils.trimToEmpty(pointLog.getReqOutput()));
             MDC.put(TIME_COST, String.valueOf(ObjectUtils.defaultIfNull(pointLog.getTimeCost(), 0)));
         }
     }
@@ -63,10 +58,6 @@ class MdcHelper {
 
     static String getBusinessType() {
         return MDC.get(BUSINESS_TYPE);
-    }
-
-    static void setReqOutput(String output) {
-        MDC.put(REQ_OUTPUT, StringUtils.trimToEmpty(output));
     }
 
     static void setTimeCost(Long timeCost) {

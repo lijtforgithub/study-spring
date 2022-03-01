@@ -1,4 +1,4 @@
-package com.ljt.study.sse;
+package com.ljt.study.log;
 
 /**
  * @author jtli3
@@ -11,7 +11,8 @@ public class LogConstant {
     public static final Integer LOG_TYPE = 1;
 
     public static final String USER_AGENT = "User-Agent";
-    public static final String CHAIN_ID = "Chain-ID";
+    public static final String CHAIN_ID = "chain-id";
+    public static final String IMA_HEADER = "ima-header";
 
 
 

@@ -1,7 +1,8 @@
 <included>
 
+    <!-- 不要随意调整格式 特别是空格 -->
     <property name="POINT_LOG_PATTERN"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%thread] logType:%X{_pol_log_type} businessType:%X{_pol_business_type} clientIp:%X{_pol_client_ip} - %msg%n"/>
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p ${PID:- } %tid app_id:${APP_NAME} log_type:%X{_pol_log_type} log_business_type:%X{_pol_business_type} log_ip:%X{_pol_client_ip} log_mac:%X{_pol_client_mac} log_url:%X{_pol_req_url} log_org_id:%X{_pol_org_id} log_user_id:%X{_pol_user_id} log_empi:%X{_pol_empi} log_chain_id:%X{_pol_chain_id} log_class_method:%X{_pol_req_method} log_time_cost:%X{_pol_time_cost} log_ima_header:%X{_pol_ima_header} req_method:%X{_pol_req_method} req_userAgent:%X{_pol_req_user_agent} --- [%t] %logger{30} : %m%n"/>
 
     <appender name="POINT" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder>
@@ -19,6 +20,5 @@
     <logger name="ima.log.point" additivity="false">
         <appender-ref ref="POINT"/>
     </logger>
-
 
 </included>

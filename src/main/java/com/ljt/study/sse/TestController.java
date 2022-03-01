@@ -31,9 +31,6 @@ public class TestController {
 
     @GetMapping("/get/{key}")
     public String get(@PathVariable String key, String param, Log log) {
-
-        PointLogger.info(BusinessTypeEnm.TEST, BusinessTypeEnm.TEST.getDesc());
-
         return GetMapping.class.getSimpleName();
     }
 

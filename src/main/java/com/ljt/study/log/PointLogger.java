@@ -1,4 +1,4 @@
-package com.ljt.study.sse;
+package com.ljt.study.log;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import java.util.Objects;
 
 /**
+ * 埋点日志输出类
+ *
  * @author jtli3
  * @date 2022-02-25 16:38
  */

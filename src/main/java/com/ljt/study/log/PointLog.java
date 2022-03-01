@@ -1,6 +1,7 @@
-package com.ljt.study.sse;
+package com.ljt.study.log;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -85,5 +86,27 @@ public class PointLog implements Serializable {
      * 出参
      */
     private String reqOutput;
+
+
+    @Getter
+    public class Msg implements Serializable {
+
+        private static final long serialVersionUID = 4845737301640856459L;
+
+        /**
+         * 入参
+         */
+        private final String input;
+        /**
+         * 出参
+         */
+        private final String output;
+
+
+        public Msg() {
+            this.input = PointLog.this.getReqInput();
+            this.output = PointLog.this.getReqOutput();
+        }
+    }
 
 }
