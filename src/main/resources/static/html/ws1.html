@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Websocket</title>
+</head>
+<script>
+    const ws = new WebSocket('ws://localhost:8080/wsHandler');
+    ws.onopen = function (event) {
+        console.log('websocket', event);
+    };
+
+    ws.onmessage = function (event) {
+        console.log('websocket', event);
+        document.getElementById('msg').innerText = event.data;
+    };
+
+    ws.onclose = function(event) {
+        console.log('websocket', event);
+        document.getElementById('msg').innerText = event.reason;
+        console.info(event.code, event.wasClean);
+    };
+
+    function send() {
+        if (WebSocket.OPEN == ws.readyState) {
+            const text = document.getElementById('text').value;
+            console.log(text);
+            if (text) {
+                ws.send(text);
+            }
+        } else {
+            console.warn('连接已关闭', ws.readyState);
+        }
+    }
+
+    function closeWs() {
+        if (WebSocket.OPEN == ws.readyState) {
+            console.log(ws);
+            ws.close(1000, '客户端发起关闭');
+        } else {
+            console.warn('连接已关闭', ws.readyState);
+        }
+    }
+</script>
+<body>
+<h1 id="msg"></h1>
+<hr/>
+<input type="text" id="text">
+<input type="button" onclick="send()" value=" Send ">
+<input type="button" onclick="closeWs()" value=" Close ">
+</body>
+</html>

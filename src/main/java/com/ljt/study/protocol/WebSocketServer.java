@@ -19,7 +19,7 @@ import static javax.websocket.CloseReason.CloseCodes.NORMAL_CLOSURE;
 @Slf4j
 @Component
 @ServerEndpoint("/ws")
-public class WsController {
+public class WebSocketServer {
 
     @OnOpen
     @SneakyThrows
@@ -43,6 +43,12 @@ public class WsController {
         String id = session.getId();
         log.info("客户端{}发送数据：{}", id, msg);
         session.getBasicRemote().sendText("服务端响应数据：" + msg);
+    }
+
+    @OnError
+    public void error(Session session, Throwable t) {
+        String id = session.getId();
+        log.error("客户端" + id + "异常", t);
     }
 
 }
