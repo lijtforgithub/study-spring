@@ -1,4 +1,4 @@
-package com.ljt.study.sse;
+package com.ljt.study.protocol;
 
 import com.ljt.study.entity.Log;
 import com.lowagie.text.Document;

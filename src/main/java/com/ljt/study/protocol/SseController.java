@@ -1,4 +1,4 @@
-package com.ljt.study.sse;
+package com.ljt.study.protocol;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
