@@ -11,15 +11,13 @@
     const stompClient = Stomp.over(ws);
 
     const fun = function(resp) {
-        console.log(resp.body);
         document.getElementById('msg').innerText = resp.body;
     };
 
     stompClient.connect({}, function(frame) {
-        stompClient.subscribe('/app/topic/message', fun);
+        stompClient.subscribe('/app/topic/message/firstload', fun);
 
         stompClient.subscribe('/topic/message', fun);
-
     });
 
     function send() {
@@ -33,11 +31,36 @@
         }
     }
 
+    function mq(type) {
+        if (WebSocket.OPEN == ws.readyState) {
+            const text = document.getElementById('text').value;
+            if (text) {
+                stompClient.send(`/${type}/msg`, {}, text)
+            }
+        } else {
+            console.warn('连接已关闭', ws.readyState);
+        }
+    }
+
+
+    const mqWs = new WebSocket('ws://localhost:15674/ws');
+    const mqClient = Stomp.over(mqWs);
+    const headers = {
+        login: 'guest',
+        passcode: 'guest'
+    };
+    mqClient.connect(headers, frame => {
+        mqClient.subscribe('/queue/msg', fun);
+        mqClient.subscribe('/topic/msg', fun);
+    });
+
 </script>
 <body>
 <h1 id="msg"></h1>
 <hr/>
 <input type="text" id="text">
 <input type="button" onclick="send()" value=" Send ">
+<input type="button" onclick="mq('queue')" value=" Queue ">
+<input type="button" onclick="mq('topic')" value=" Topic ">
 </body>
 </html>

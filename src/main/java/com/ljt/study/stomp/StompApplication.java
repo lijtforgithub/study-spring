@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
  * rabbitmq-plugins enable rabbitmq_stomp
+ * rabbitmq-plugins enable rabbitmq_web_stomp
  *
  * @author LiJingTang
  * @date 2022-03-11 9:29
