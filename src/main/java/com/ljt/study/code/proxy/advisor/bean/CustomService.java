@@ -6,6 +6,7 @@ package com.ljt.study.code.proxy.advisor.bean;
  */
 public interface CustomService {
 
+    @Log
     void methodA();
 
     void methodB();

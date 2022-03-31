@@ -21,8 +21,10 @@ class SpringTest {
     @SneakyThrows
     @Test
     void test() {
-        customService.methodB();
         log.info("customService = {}", customService.getClass().getName());
+        customService.methodA();
+        customService.methodB();
+//        customService.methodA();
     }
 
 }

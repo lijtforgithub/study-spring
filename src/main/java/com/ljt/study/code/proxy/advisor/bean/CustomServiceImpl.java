@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 class CustomServiceImpl implements CustomService {
 
     @Override
-    @Log
     public void methodA() {
         log.info("A");
     }
@@ -20,6 +19,7 @@ class CustomServiceImpl implements CustomService {
     @Override
     @Log
     public void methodB() {
+        System.out.println(this.getClass());
         methodA();
         log.info("B");
     }
