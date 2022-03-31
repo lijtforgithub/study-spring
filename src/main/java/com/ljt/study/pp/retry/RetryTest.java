@@ -20,7 +20,7 @@ class RetryTest {
     @SneakyThrows
     @Test
     void retryable() {
-        retryService.retryable("arg1");
+        log.info(retryService.retryable("arg"));
     }
 
     @Test

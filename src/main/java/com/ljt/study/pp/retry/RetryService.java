@@ -21,7 +21,7 @@ public class RetryService {
             listeners = "customRetryListener",
 //            interceptor = "customMethodInterceptor",
             backoff = @Backoff(value = 500, multiplier = 1.5))
-    public void retryable(String param) throws IOException {
+    public String retryable(String param) throws IOException {
         log.info("retryable: {}", param);
 
         Objects.requireNonNull(param, "空指针异常");
@@ -31,18 +31,24 @@ public class RetryService {
         if ("io".equals(param)) {
             throw new IOException("IO异常");
         }
+
+        return Retryable.class.getName();
     }
 
     @CircuitBreaker(value = IllegalArgumentException.class)
-    public void circuitBreaker(String param) {
+    public String circuitBreaker(String param) {
         log.info("circuitBreaker: {}", param);
 
         Assert.isTrue(!"arg".equals(param), "IllegalArgumentException异常");
+
+        return CircuitBreaker.class.getName();
     }
 
     @Recover
-    public void recover(Throwable e, String param) {
+    public String recover(Throwable e, String param) throws Throwable {
         log.info("||| recover: {} -  {}", param, e.getMessage());
+        throw e;
+//        return Recover.class.getName();
     }
 
 }
