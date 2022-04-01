@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SocketIo</title>
+</head>
+<script src="https://cdn.bootcss.com/socket.io/2.2.0/socket.io.js"></script>
+<script>
+    const socket = io.connect("ws://localhost:10443");
+
+    socket.on('connect', () => {
+        document.getElementById('msg').innerText = '建立连接';
+    });
+
+</script>
+<body>
+<h1 id="msg"></h1>
+</body>
+</html>

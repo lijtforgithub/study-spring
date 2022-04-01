@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SocketIo</title>
+</head>
+<script src="https://cdn.bootcss.com/socket.io/2.2.0/socket.io.js"></script>
+<script>
+    const socket = io.connect("ws://localhost:9090");
+
+    socket.on('connect', () => {
+        document.getElementById('msg').innerText = '建立连接';
+    });
+
+    socket.on('ack.event.2', function(data, ackServerCallback, arg1) {
+        console.info('ack.event.2', data);
+
+        // if (ackServerCallback) {
+        //     ackServerCallback('确认消息：ack.event.2');
+        // }
+    });
+
+    socket.on('ack.event.3', function(data, ackServerCallback) {
+        console.info('ack.event.3', data);
+
+        if (ackServerCallback) {
+            ackServerCallback();
+        }
+    });
+
+    function send() {
+        if (socket.connected) {
+            const text = document.getElementById('text').value;
+            if (text) {
+                const userName = 'user' + Math.floor((Math.random() * 1000) + 1);
+                const message = text;
+                socket.emit('ack.event.1', {userName, message})
+            }
+        } else {
+            console.warn('连接已关闭', socket);
+        }
+    }
+</script>
+<body>
+<h1 id="msg"></h1>
+<hr/>
+<input type="text" id="text">
+<input type="button" onclick="send()" value=" Send ">
+</body>
+</html>
