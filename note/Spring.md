@@ -5,7 +5,7 @@
 the {`<context:component-scan\>`} element has an {annotation-config} attribute; however, this annotation does not.  
 This is because in almost all cases when using {@ComponentScan}, default annotation config processing (e.g. processing {@Autowired} and friends) is assumed.
 3. @Import
-    1. @Import + ImportSelector
+    1. @Import + ImportSelector(延迟 DeferredImportSelector)
     2. @Import + ImportBeanDefinitionRegistrar
 4. FactoryBean（懒加载 而且没有生命周期那套逻辑 SmartFactoryBean）
 5. InstanceSupplier
