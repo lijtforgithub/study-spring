@@ -9,7 +9,8 @@
     const socket = io.connect("http://localhost:9090", {
         transports: ['websocket'],
         query: {
-            token: '1A2B3C4D'
+            orgId: Math.floor((Math.random() * 1000) + 1),
+            userId: Math.floor((Math.random() * 1000) + 1)
         }
     });
     console.info(socket);
