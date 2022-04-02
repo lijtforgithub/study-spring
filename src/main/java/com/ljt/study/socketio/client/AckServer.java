@@ -17,7 +17,6 @@ class AckServer extends AbstractServer {
         ackServer.getServer().addEventListener("ack.event.1", ChatMessage.class, (client, data, ackRequest) -> {
             // check is ack requested by client,
             // but it's not required check
-            System.out.println("isAckRequested - " + ackRequest.isAckRequested());
             if (ackRequest.isAckRequested()) {
                 // send ack response with data to client
                 ackRequest.sendAckData("client message was delivered to server!", "yeah!");
@@ -30,7 +29,7 @@ class AckServer extends AbstractServer {
                 public void onSuccess(String result) {
                     log.info("ack from client: {}", result);
                 }
-            }, msg1);
+            }, msg1, "额外参数");
 
             ChatMessage msg2 = new ChatMessage(data.getUserName(), "message with void ack");
             client.sendEvent("ack.event.3", new VoidAckCallback() {

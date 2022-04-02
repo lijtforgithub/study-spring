@@ -1,9 +1,6 @@
 package com.ljt.study.socketio.client;
 
-import com.corundumstudio.socketio.Configuration;
-import com.corundumstudio.socketio.SocketConfig;
-import com.corundumstudio.socketio.SocketIOClient;
-import com.corundumstudio.socketio.SocketIOServer;
+import com.corundumstudio.socketio.*;
 import com.corundumstudio.socketio.listener.ExceptionListener;
 import io.netty.channel.ChannelHandlerContext;
 import lombok.Getter;
@@ -36,7 +33,6 @@ class AbstractServer {
         socketConfig.setReuseAddress(true);
 
         Configuration config = new Configuration();
-//        config.setHostname("localhost");
         config.setPort(9090);
         config.setSocketConfig(socketConfig);
 

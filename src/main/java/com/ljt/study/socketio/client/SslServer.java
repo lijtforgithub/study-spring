@@ -4,6 +4,7 @@ import com.corundumstudio.socketio.Configuration;
 
 import java.io.InputStream;
 
+
 /**
  * @author LiJingTang
  * @date 2022-04-01 16:53
@@ -18,11 +19,10 @@ class SslServer extends AbstractServer {
     @Override
     protected Configuration getConfig() {
         Configuration config = new Configuration();
-        config.setHostname("localhost");
         config.setPort(10443);
 
         config.setKeyStorePassword("test1234");
-        InputStream stream = SslServer.class.getResourceAsStream("keystore.jks");
+        InputStream stream = SslServer.class.getResourceAsStream("/socketio/keystore.jks");
         config.setKeyStore(stream);
 
         return config;

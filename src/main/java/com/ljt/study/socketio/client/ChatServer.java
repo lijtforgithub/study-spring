@@ -10,12 +10,11 @@ import org.apache.commons.lang3.RandomStringUtils;
 @Slf4j
 class ChatServer extends AbstractServer {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         ChatServer chatServer = new ChatServer();
 
         chatServer.getServer().addEventListener("chat.event", ChatMessage.class, (client, data, ackRequest) -> {
             log.info("消息进来：{} => {}", client.getSessionId(), data.toString());
-            System.out.println(ackRequest.isAckRequested());
             // broadcast messages to all clients
             chatServer.getServer().getBroadcastOperations().sendEvent("chat.event", new ChatMessage("xxoo", RandomStringUtils.randomAlphabetic(10)));
         });

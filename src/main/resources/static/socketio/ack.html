@@ -12,19 +12,19 @@
         document.getElementById('msg').innerText = '建立连接';
     });
 
-    socket.on('ack.event.2', function(data, ackServerCallback, arg1) {
-        console.info('ack.event.2', data);
+    socket.on('ack.event.2', function(data, arg, ackCall) {
+        console.info('ack.event.2', data.message, arg);
 
-        // if (ackServerCallback) {
-        //     ackServerCallback('确认消息：ack.event.2');
-        // }
+        if (ackCall) {
+            ackCall('确认消息：ack.event.2');
+        }
     });
 
-    socket.on('ack.event.3', function(data, ackServerCallback) {
-        console.info('ack.event.3', data);
+    socket.on('ack.event.3', function(data, ackCall) {
+        console.info('ack.event.3', data.message);
 
-        if (ackServerCallback) {
-            ackServerCallback();
+        if (ackCall) {
+            ackCall();
         }
     });
 
@@ -34,7 +34,9 @@
             if (text) {
                 const userName = 'user' + Math.floor((Math.random() * 1000) + 1);
                 const message = text;
-                socket.emit('ack.event.1', {userName, message})
+                socket.emit('ack.event.1', {userName, message}, resp => {
+                    alert(resp);
+                });
             }
         } else {
             console.warn('连接已关闭', socket);

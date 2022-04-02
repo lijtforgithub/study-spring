@@ -6,7 +6,12 @@
 </head>
 <script src="https://cdn.bootcss.com/socket.io/2.2.0/socket.io.js"></script>
 <script>
-    const socket = io.connect("http://localhost:9090");
+    const socket = io.connect("http://localhost:9090", {
+        transports: ['websocket'],
+        query: {
+            token: '1A2B3C4D'
+        }
+    });
     console.info(socket);
 
     socket.on('connect', () => {
