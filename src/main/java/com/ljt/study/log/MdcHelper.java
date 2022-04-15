@@ -11,7 +11,7 @@ import java.util.Set;
  * @author LiJingTang
  * @date 2022-02-26 16:13
  */
-class MdcHelper {
+public class MdcHelper {
     
     private MdcHelper() {}
 
@@ -32,7 +32,7 @@ class MdcHelper {
     private static final String REQ_METHOD = PREFIX + "req_method";
     private static final String REQ_USER_AGENT = PREFIX + "req_user_agent";
 
-    static void putPointLog(PointLog pointLog) {
+    public static void putPointLog(PointLog pointLog) {
         if (Objects.nonNull(pointLog)) {
             MDC.put(LOG_TYPE, String.valueOf(ObjectUtils.defaultIfNull(pointLog.getLogType(), LogConstant.LOG_TYPE)));
             MDC.put(BUSINESS_TYPE, StringUtils.trimToEmpty(pointLog.getBusinessType()));
@@ -64,7 +64,7 @@ class MdcHelper {
         MDC.put(TIME_COST, String.valueOf(ObjectUtils.defaultIfNull(timeCost, 0)));
     }
     
-    static void clearPointLog() {
+    public static void clearPointLog() {
         Set<String> keys = MDC.getCopyOfContextMap().keySet();
         keys.forEach(k -> {
             if (k.startsWith(PREFIX)) {
