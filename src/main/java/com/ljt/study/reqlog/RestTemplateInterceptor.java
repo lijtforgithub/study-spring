@@ -3,7 +3,7 @@ package com.ljt.study.reqlog;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.ljt.study.log.LogConstant;
+import com.ljt.study.reqlog.log.LogConstant;
 import com.ljt.study.reqlog.api.MedicalAiException;
 import com.ljt.study.reqlog.enums.ApiPathEnum;
 import com.ljt.study.reqlog.enums.SystemEnum;

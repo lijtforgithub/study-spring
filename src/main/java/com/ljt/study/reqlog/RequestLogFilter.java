@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Sets;
 import com.ljt.study.log.*;
 import com.ljt.study.reqlog.api.Response;
+import com.ljt.study.reqlog.log.*;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
@@ -28,7 +29,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.Phaser;
 
-import static com.ljt.study.log.LogConstant.REQ_POINT;
+import static com.ljt.study.reqlog.log.LogConstant.REQ_POINT;
 import static com.ljt.study.reqlog.api.MedicalAiExceptionEnum.CHAIN;
 import static com.ljt.study.reqlog.api.MedicalAiExceptionEnum.SERVER_ERROR;
 import static javax.servlet.http.HttpServletResponse.SC_OK;

@@ -1,4 +1,4 @@
-package com.ljt.study.log;
+package com.ljt.study.reqlog.log;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

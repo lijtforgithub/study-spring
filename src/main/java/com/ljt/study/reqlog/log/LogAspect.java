@@ -1,4 +1,4 @@
-package com.ljt.study.log;
+package com.ljt.study.reqlog.log;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
@@ -28,8 +28,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-import static com.ljt.study.log.BusinessTypeEnm.COMMON;
-import static com.ljt.study.log.LogConstant.*;
+import static com.ljt.study.reqlog.log.BusinessTypeEnm.COMMON;
 
 @Slf4j
 @Aspect
@@ -110,7 +109,7 @@ class LogAspect {
 
         try {
             Signature signature = joinPoint.getStaticPart().getSignature();
-            pointLog.setLogType(LOG_TYPE)
+            pointLog.setLogType(LogConstant.LOG_TYPE)
                     .setTimestampe(System.currentTimeMillis())
                     .setClassMethod(String.format("%s#%s", signature.getDeclaringTypeName(), signature.getName()))
                     .setBusinessType(COMMON.getCode())
@@ -121,9 +120,9 @@ class LogAspect {
             if (Objects.nonNull(attributes)) {
                 HttpServletRequest request = attributes.getRequest();
                 pointLog.setClientIp(getIpAddress(request))
-                        .setReqUserAgent(request.getHeader(USER_AGENT))
-                        .setChainId(request.getHeader(CHAIN_ID))
-                        .setImaHeader(request.getHeader(IMA_HEADER))
+                        .setReqUserAgent(request.getHeader(LogConstant.USER_AGENT))
+                        .setChainId(request.getHeader(LogConstant.CHAIN_ID))
+                        .setImaHeader(request.getHeader(LogConstant.IMA_HEADER))
                         .setReqUrl(request.getRequestURI())
                         .setReqMethod(request.getMethod());
             }

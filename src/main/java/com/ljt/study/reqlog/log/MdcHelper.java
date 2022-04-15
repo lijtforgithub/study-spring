@@ -1,4 +1,4 @@
-package com.ljt.study.log;
+package com.ljt.study.reqlog.log;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;

@@ -1,4 +1,4 @@
-package com.ljt.study.log;
+package com.ljt.study.reqlog.log;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
