@@ -17,7 +17,7 @@ import java.util.*;
 public class PrintCpu {
 
     public static void premain(String agentArgs, Instrumentation inst) {
-        System.out.println("JVM 载入 agent：" + PrintCpu.class.toString());
+        System.out.println("JVM 载入 agent：" + PrintCpu.class);
         inst.addTransformer(new PrintReturnValueTransformer());
     }
 
