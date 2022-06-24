@@ -4,14 +4,19 @@ import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.BeanUtils;
 import org.springframework.core.MethodParameter;
+import org.springframework.core.Ordered;
+import org.springframework.core.PriorityOrdered;
+import org.springframework.core.annotation.Order;
 import org.springframework.util.StopWatch;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -24,6 +29,7 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -31,6 +37,7 @@ import java.util.stream.Stream;
 import static com.ljt.study.reqlog.log.BusinessTypeEnm.COMMON;
 
 @Slf4j
+@Order(Ordered.HIGHEST_PRECEDENCE + 100)
 @Aspect
 class LogAspect {
 
@@ -57,6 +64,20 @@ class LogAspect {
 
     @Pointcut("getM() || post() || put() || patch() || delete() || request()")
     public void method() {}
+
+    @Before("pack() && method()")
+    public void before(JoinPoint joinPoint) {
+        System.out.println("	" + this.getClass().getName() + "...before()...");
+        System.out.println(Arrays.toString(joinPoint.getArgs()));
+        System.out.println(joinPoint.getThis() + " - " + joinPoint.getThis().getClass());
+        System.out.println(joinPoint.getTarget() + " - " + joinPoint.getTarget().getClass());
+        System.out.println(joinPoint.getThis() == joinPoint.getTarget());
+        System.out.println(joinPoint.getSignature());
+        System.out.println(joinPoint.toString());
+        System.out.println(joinPoint.getSourceLocation());
+        System.out.println(joinPoint.getKind());
+        System.out.println(joinPoint.getStaticPart());
+    }
 
 
     @Around("pack() && method()")
