@@ -2,10 +2,10 @@ package com.ljt.study.tx;
 
 import com.ljt.study.entity.Log;
 import com.ljt.study.tx.service.TxLogService;
+import com.ljt.study.tx.spread.OuterTxService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
 
 import java.util.stream.IntStream;
 
@@ -20,7 +20,7 @@ class TxTest {
     private TxLogService logService;
 
     @Autowired
-    private ApplicationContext applicationContext;
+    private OuterTxService outerTxService;
 
     @Test
     void genData() {
@@ -33,6 +33,11 @@ class TxTest {
     @Test
     void testSelect() {
         IntStream.rangeClosed(1, 10).forEach(i -> logService.getById(i));
+    }
+
+    @Test
+    void txSpread() {
+        outerTxService.txSpread();
     }
 
 }

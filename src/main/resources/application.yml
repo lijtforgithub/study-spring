@@ -37,3 +37,4 @@ spring:
 logging:
   level:
     org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: TRACE
+    org.springframework.jdbc.support: DEBUG
