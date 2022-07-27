@@ -1,5 +1,7 @@
 package com.ljt.study.tx;
 
+import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ljt.study.entity.Log;
 import com.ljt.study.tx.service.TxLogService;
 import com.ljt.study.tx.spread.OuterTxService;
@@ -32,7 +34,9 @@ class TxTest {
 
     @Test
     void testSelect() {
-        IntStream.rangeClosed(1, 10).forEach(i -> logService.getById(i));
+        Page<Log> page = logService.findPage();
+        System.out.println(JSON.toJSONString(page));
+//        IntStream.rangeClosed(1, 10).forEach(i -> logService.getById(i));
     }
 
     @Test

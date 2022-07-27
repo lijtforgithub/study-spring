@@ -1,5 +1,6 @@
 package com.ljt.study.tx.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ljt.study.entity.Log;
 import com.ljt.study.tx.mapper.TxLogMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,11 @@ public class TxLogService {
 
     public List<Log> findAllUserJdbc() {
         return jdbcTemplate.query(SELECT_ALL, new BeanPropertyRowMapper<Log>(Log.class));
+    }
+
+    public Page<Log> findPage() {
+        Page<Log> page = new Page<>();
+        return logMapper.selectPage(page, null);
     }
 
 }
