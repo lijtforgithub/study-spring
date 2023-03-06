@@ -13,13 +13,13 @@ import java.nio.charset.StandardCharsets;
  * @date 2020-01-03 21:29
  */
 @SpringJUnitConfig(ValueConfig.class)
-public class ValueTest {
+class ValueTest {
 
     @Autowired
     private ValueConfig config;
 
     @Test
-    public void test() throws IOException {
+    void test() throws IOException {
         System.out.println(config);
 
         System.out.println(config.getNormal());
