@@ -4,14 +4,19 @@ import com.ljt.study.AbstractTest;
 import com.ljt.study.code.bfpp.supplier.BfppSupplierConfig;
 import com.ljt.study.code.bpp.Bpp;
 import com.ljt.study.code.bpp.instantiation.InstantiationAwareBppConfig;
+import com.ljt.study.code.cycle.A;
 import com.ljt.study.code.populate.PopulateBean;
 import com.ljt.study.code.replace.OriginalHello;
+import com.ljt.study.code.test.ComponentBean;
+import com.ljt.study.code.test.XmlBean;
 import com.ljt.study.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.PropertyAccessorFactory;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.convert.ConversionService;
 
 import java.util.Objects;
@@ -26,6 +31,15 @@ import java.util.Objects;
  */
 @Slf4j
 class CodeTest extends AbstractTest {
+
+    @Test
+    void test() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("classpath:code/test-context.xml");
+        log.info("xml = {}", context.getBean(XmlBean.class));
+        log.info("注解 = {}", context.getBean(ComponentBean.class));
+
+        ((AbstractApplicationContext) context).close();
+    }
 
     @Test
     void context() {
@@ -103,7 +117,9 @@ class CodeTest extends AbstractTest {
     @Test
     void cycle() {
         setApplicationContext("cycle");
-//        A bean = applicationContext.getBean(A.class);
+        A bean = applicationContext.getBean(A.class);
+        bean.print();
+        log.info(bean.getClass().toString());
 //        log.info(bean.getB().getClass());
     }
 
