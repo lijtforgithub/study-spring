@@ -16,9 +16,9 @@ import javax.annotation.PreDestroy;
 @Component
 public class ComponentBean {
 
-    @Value("${component.bean.id}")
+    @Value("${component.bean.id:0}")
     private Integer id;
-    @Value("${component.bean.name}")
+    @Value("${component.bean.name:xxoo}")
     private String name;
 
 

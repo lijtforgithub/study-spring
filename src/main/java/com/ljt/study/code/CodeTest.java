@@ -8,6 +8,7 @@ import com.ljt.study.code.cycle.A;
 import com.ljt.study.code.populate.PopulateBean;
 import com.ljt.study.code.replace.OriginalHello;
 import com.ljt.study.code.test.ComponentBean;
+import com.ljt.study.code.test.TestConfig;
 import com.ljt.study.code.test.XmlBean;
 import com.ljt.study.entity.User;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.PropertyAccessorFactory;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.convert.ConversionService;
@@ -39,6 +41,12 @@ class CodeTest extends AbstractTest {
         log.info("注解 = {}", context.getBean(ComponentBean.class));
 
         ((AbstractApplicationContext) context).close();
+    }
+
+    @Test
+    void testConfig() {
+        ApplicationContext context = new AnnotationConfigApplicationContext(TestConfig.class);
+        log.info("注解 = {}", context.getBean(ComponentBean.class));
     }
 
     @Test
