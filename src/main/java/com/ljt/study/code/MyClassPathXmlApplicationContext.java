@@ -23,7 +23,7 @@ class MyClassPathXmlApplicationContext extends ClassPathXmlApplicationContext {
     @Override
     protected void initPropertySources() {
         log.info("扩展 initPropertySources");
-        getEnvironment().setRequiredProperties("OS");
+//        getEnvironment().setRequiredProperties("OS");
     }
 
     @Override
