@@ -35,6 +35,7 @@ import static javax.servlet.http.HttpServletResponse.SC_OK;
 
 /**
  * 与GlobalExceptionHandler结合使用
+ * ContentCachingRequestWrapper 必须业务先读取才有缓存
  *
  * @author jtli3
  * @date 2022-01-06 20:02
