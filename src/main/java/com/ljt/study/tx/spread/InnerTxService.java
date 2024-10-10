@@ -17,14 +17,24 @@ public class InnerTxService {
     @Autowired
     private TxLogMapper logMapper;
 
-    @Transactional(propagation = Propagation.NESTED)
-    public void txSpread() {
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void txSpread1(String content) {
         Log inner = new Log();
-        inner.setId(10);
-        inner.setContent("inner");
-        logMapper.insert(inner);
+        inner.setId(1);
+        inner.setContent(content);
+        logMapper.updateById(inner);
 
-        throw new RuntimeException("测试事务传播");
+//        throw new RuntimeException("测试事务传播1");
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void txSpread2(String content) {
+        Log inner = new Log();
+        inner.setId(2);
+        inner.setContent(content);
+        logMapper.updateById(inner);
+
+        throw new RuntimeException("测试事务传播2");
     }
 
 }
