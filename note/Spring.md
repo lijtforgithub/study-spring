@@ -1,4 +1,7 @@
+## 知识点
+
 #### 加载Bean
+
 1. @Bean
 2. @ComponentScan 配合@Component、@Controller、@Service、@Repository
 > @ComponentScan: If specific packages are not defined, scanning will occur from the package of the class that declares this annotation.
@@ -26,7 +29,15 @@
 #### EmbeddedValueResolverAware
 #### AopContext.currentProxy()
 
+#### 循环依赖
 
+- **构造参数循环依赖**
+
+通过构造器注入构成的循环依赖，此依赖是无法解决的，只能抛出BeanCurrentlyIn CreationException异常表示循环依赖。
+
+- **setter方式单例** 实例化、初始化
+
+  对于"prototype"作用域bean，Spring容器无法完成依赖注入，因为Spring容器不进行缓存"prototype"作用域的bean，因此无法提前暴露一个创建中的bean。
 
 ## 事务传播机制
 
