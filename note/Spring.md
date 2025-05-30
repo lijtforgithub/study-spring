@@ -33,7 +33,7 @@
 
 - **构造参数循环依赖**
 
-通过构造器注入构成的循环依赖，此依赖是无法解决的，只能抛出BeanCurrentlyIn CreationException异常表示循环依赖。
+通过构造器注入构成的循环依赖，此依赖是无法解决的，只能抛出BeanCurrentlyInCreationException异常表示循环依赖。
 
 - **setter方式单例** 实例化、初始化
 
